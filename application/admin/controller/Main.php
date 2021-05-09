@@ -5,61 +5,39 @@ namespace app\admin\controller;
 class Main extends Base
 {
     /*
-     * welcome
+     * 后台首页
      */
-    public function index()
+    public function main()
     {
-        $time1 = trim(input("time1"));
-        $time2 = trim(input("time2"));
-        if (empty($time1) && empty($time2)) {
-            $time1 = date("Y-m-d 00:00:00");
-            $time2 = date("Y-m-d 23:59:59");
-        }
-
-        return view('index', compact(
-            'time1',
-            'time2',
-        ));
+        return view();
     }
 
     /*
      * 修改密码
      */
-    public function cpw()
-    {
-        return view();
-    }
-
     public function doCPW()
     {
-        $password_cur = input('password_cur');
-        $password_new1 = input('password_new1');
-        $password_new2 = input('password_new2');
+        $postData = input();
+        trace($postData);
+        $check = $this->validate($postData, [
+            'pwd1|原密码'   => 'require|min:6',
+            'pwd2|新密码'   => 'require|min:6|different:pwd1',
+            'pwd3|确认密码' => 'require|confirm:pwd2',
+        ]);
+        trace($check);
+        if (true !== $check) {
+            return error($check);
+        }
 
-        if (empty($password_cur) || empty($password_new1) || empty($password_new2)) {
-            return error("Sorry,请检查输入");
-        }
-        if ($password_cur == $password_new1) {
-            return error("Sorry,新旧密码一致");
-        }
-        if ($password_new1 != $password_new2) {
-            return error("Sorry,确认密码不正确");
-        }
-        if (strlen($password_new1) < 6) {
-            return error("Sorry,密码长度小于6位数");
-        }
         $id = $this->getAdminId();
 
-        $find = db("admin")->where('role', '1')->where('id', $id)
-            ->where('password', md5($password_cur))->find();
+        $find = db("admin")->where('id', $id)->where('password', md5($postData['pwd1']))->find();
 
         if (!$find) {
-            return error("Sorry,旧密码错误");
+            return error("原密码错误");
         }
 
-        $data['password'] = md5($password_new1);
-        $data["update_at"] = date("Y-m-d H:i:s", time());
-        $ret = db("admin")->where('role', '1')->where("id", "=", $id)->update($data);
+        $ret = db("admin")->where("id", $id)->update(['password' => md5($postData['pwd2'])]);
         if ($ret) {
             return success("恭喜,修改成功");
         } else {

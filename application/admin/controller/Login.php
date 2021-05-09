@@ -7,11 +7,10 @@ use think\Controller;
 
 class Login extends Controller
 {
-    private $mVerifyType = 1; // 登录验证类型:(1:谷歌验证器/2:图形验证码)
+    private $mVerifyType = 2; // 登录验证类型:(1:谷歌验证器/2:图形验证码)
 
     // PHP: composer require "phpgangsta/googleauthenticator:dev-master"
-    // iOS: AppStore搜索Authenticator
-    // Android: GooglePlay搜索Google身份验证器或者其他安卓市场下载
+    // iOS: AppStore搜索Authenticator / Android: GooglePlay搜索Google身份验证器或者其他安卓市场下载
     // 创建谷歌认证并记录密钥和二维码地址
     public function createGoogleAuth()
     {
@@ -29,13 +28,23 @@ class Login extends Controller
         $qrCodeUrl  = $ga->getQRCodeGoogleUrl($name, $secret); //密钥二维码
         $data       = array('secret' => $secret, 'qrCodeUrl' => $qrCodeUrl);
 
-        $result     = db('sys_params')->insert(['key' => 'GoogleAuthenticator', 'value' => json_encode($data)]);
+        $result     = db('sys_params')->insert([
+            'key' => 'GoogleAuthenticator',
+            'value' => json_encode($data), 'remarks' => 'Google身份验证器'
+        ]);
+
         if ($result) {
             return "success";
         }
         return "fail";
     }
 
+    /**
+     * Google身份验证器校验
+     *
+     * @param string $code
+     * @return bool
+     */
     private function verifyGoogleAuth($code = '')
     {
         $ga             = new PHPGangsta_GoogleAuthenticator();
@@ -47,18 +56,19 @@ class Login extends Controller
         return false;
     }
 
+    /**
+     * 登录页面
+     *
+     * @return view
+     */
     public function index()
     {
-        $key = input('key');
-        if ($key != '98k') {
-            return '404';
-        }
         $this->assign('mVerifyType', $this->mVerifyType);
-        return view();
+        return view('main/login');
     }
 
     /*
-     * 登陆接口
+     * 登陆校验
      */
     public function check()
     {
@@ -81,7 +91,7 @@ class Login extends Controller
             }
         }
 
-        $admin = db("admin")->where('role', '1')->where("user_name", $userName)->find();
+        $admin = db("admin")->where("user_name", $userName)->find();
 
         if (empty($admin) || $admin["password"] != md5($password)) {
             return error("用户名或密码错误");
@@ -92,6 +102,7 @@ class Login extends Controller
 
         session("admin_loginTime", time());
         session("admin_id", $admin["id"]);
+        session("admin_role", $admin["role"]);
         session("admin_username", $admin["user_name"]);
 
         $data["last_login_time"] = date("Y-m-d H:i:s", time());
@@ -107,7 +118,8 @@ class Login extends Controller
     {
         session("admin_loginTime", null);
         session("admin_id", null);
+        session("admin_role", null);
         session("admin_username", null);
-        $this->redirect("admin/login/index?key=98k");
+        $this->redirect("/admin/login");
     }
 }

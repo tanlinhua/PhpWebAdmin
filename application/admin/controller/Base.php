@@ -21,20 +21,30 @@ class Base extends Controller
         if ($calc > $timeOut && $this->mTimeOutFlag) {
             session("admin_loginTime", null);
             session("admin_id", null);
+            session("admin_role", null);
             session("admin_username", null);
-            $this->error('登录超时', URL('admin/login/index?key=98k'));
+            $this->error('登录超时', URL('/admin/login'));
         } else {
             session('admin_loginTime', $nowTime);
         }
-        $this->assign("nickName", session("admin_username"));
+        $this->assign("adminName", session("admin_username"));
     }
 
     public function getAdminId()
     {
         $adminId = session('admin_id');
         if (empty($adminId)) {
-            $this->error('登录超时', URL('admin/login/index?key=98k'));
+            $this->error('登录超时', URL('/admin/login'));
         }
         return $adminId;
+    }
+
+    public function getAdminRole()
+    {
+        $role = session("admin_role");
+        if (empty($role)) {
+            $this->error('登录超时', URL('/admin/login'));
+        }
+        return $role;
     }
 }
