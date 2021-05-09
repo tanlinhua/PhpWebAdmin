@@ -17,7 +17,11 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "topthink/framework": "5.0.*"
+        "topthink/framework": "5.0.*",
+        "swoole/ide-helper": "@dev",
+        "firebase/php-jwt": "^5.2",
+        "phpgangsta/googleauthenticator": "dev-master",
+        "topthink/think-captcha": "1.*"
     },
     "autoload": {
         "psr-4": {
