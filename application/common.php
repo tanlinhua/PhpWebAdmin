@@ -17,25 +17,26 @@ use think\Cache;
 /**
  * 响应成功的json数据
  *
- * @param  string $msg
- * @param  string $data
- * @return json
+ * @param   string $msg
+ * @param   int $count 数据总数->for layui
+ * @param   array $data
+ * @return  json
  */
-function success($msg = '', $data = '')
+function success($msg = 'success', $count = 0, $data = array())
 {
-    $data = array('code' => 1, 'msg' => $msg, 'data' => $data);
+    $data = array('code' => 0, 'msg' => $msg, 'count' => $count, 'data' => $data);
     return json($data);
 }
 
 /**
  * 响应失败的json数据
  *
- * @param  string $str
+ * @param  string $msg
  * @return json
  */
-function error($str = '')
+function error($msg = 'fail', $code = -1)
 {
-    $data = array('code' => 0, 'msg' => $str);
+    $data = array('code' => $code, 'msg' => $msg, 'count' => 0, 'data' => null);
     return json($data);
 }
 
