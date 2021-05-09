@@ -12,6 +12,11 @@ class Main extends Base
         return view();
     }
 
+    public function console()
+    {
+        return view();
+    }
+
     /*
      * 修改密码
      */

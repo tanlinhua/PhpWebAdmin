@@ -20,10 +20,11 @@ Route::group('admin', [
     'login'         => ['admin/Login/index', ['method' => 'get']],
 
     //修改密码
-    'main/cpw'      => ['admin/Main/doCPW', ['method' => 'post']],
+    'cpw'           => ['admin/Main/doCPW', ['method' => 'post']],
+    //控制台
+    'console'       => ['admin/Main/console', ['method' => 'get']],
     //后台首页
     'main'          => ['admin/Main/main', ['method' => 'get']],
-
 ]);
 
 // Index
