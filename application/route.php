@@ -9,6 +9,8 @@ use think\Route;
 // Route::domain('api', 'api'); //绑定前端模块
 // Route::domain('admin', 'admin'); //绑定后端模块
 
+// 生成路由缓存 > php think optimize:route
+
 Route::miss("/miss");
 Route::get('miss', 'index/Index/miss');
 

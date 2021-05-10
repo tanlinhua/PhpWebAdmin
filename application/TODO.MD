@@ -14,5 +14,5 @@ composer require guzzlehttp/guzzle
 代办:
     1.验证路由规则
     2.二级域名绑定模块
-    3.rbac开发
+    3.rbac开发 动态生成菜单
     4.实验一些队列消息/异步任务等功能
