@@ -41,23 +41,36 @@
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
 
-                    <!-- {{ range $k, $item := .menuData }}
-                    {{ if eq $item.Checked true }}
                     <li class="layui-nav-item">
                         <a href="javascript:;">
-                            <i class="layui-icon">&#{{ $item.Icon }}</i>
-                            <em>{{ $item.Name }}</em>
+                            <i class="layui-icon">&#xe68e;</i>
+                            <em>主页</em>
                         </a>
                         <dl class="layui-nav-child">
-                            {{ range $k, $v := $item.Children }}
-                            {{ if eq $v.Checked true }}
-                            <dd><a href="{{.Uri}}">{{.Name}}</a></dd>
-                            {{end}}
-                            {{end}}
+                            <dd><a href="/admin/console">控制台</a></dd>
                         </dl>
                     </li>
-                    {{ end}}
-                    {{ end}} -->
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe672;</i>
+                            <em>权限配置</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/admin/adm/view">用户管理</a></dd>
+                            <dd><a href="/admin/role/view">角色管理</a></dd>
+                            <dd><a href="/admin/per/view">权限管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe716;</i>
+                            <em>系统配置</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/admin/params/view">系统参数</a></dd>
+                        </dl>
+                    </li>
+
                 </ul>
             </div>
         </div>

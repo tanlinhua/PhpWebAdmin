@@ -259,8 +259,13 @@ return [
         'useArithmetic' => true,
     ],
 
+    //Admin
+    'admin'                 => [
+        'id'       => 1,
+    ],
+
     //JWT
-    'jwt'               => [
+    'jwt'                   => [
         'key'       => 'WWW.JWT.KEY',
         'time_out'  => 86400,
     ],

@@ -8,9 +8,7 @@ class Index extends Controller
 {
     public function index()
     {
-        // halt(request()->param());
-        return 'index';
-        // $this->redirect('/app', 302);
+        $this->redirect('/app', 302);
     }
 
     /**
@@ -26,10 +24,5 @@ class Index extends Controller
     public function hello()
     {
         return 'hello';
-    }
-
-    public function test()
-    {
-        return 'test';
     }
 }

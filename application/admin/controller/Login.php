@@ -102,7 +102,6 @@ class Login extends Controller
 
         session("admin_loginTime", time());
         session("admin_id", $admin["id"]);
-        session("admin_role", $admin["role"]);
         session("admin_username", $admin["user_name"]);
 
         $data["last_login_time"] = date("Y-m-d H:i:s", time());
@@ -118,7 +117,6 @@ class Login extends Controller
     {
         session("admin_loginTime", null);
         session("admin_id", null);
-        session("admin_role", null);
         session("admin_username", null);
         $this->redirect("/admin/login");
     }

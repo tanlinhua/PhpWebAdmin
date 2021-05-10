@@ -271,13 +271,13 @@ function cleanRedisList($taskId)
  * 发送网络请求
  *
  * @param  string  $url
- * @param  string  or        array $params
+ * @param  string  or array $params
  * @param  string  $method
  * @param  string  $head
  * @param  boolean $https
  * @return array
  */
-function do_curl($url, $params, $method = 'POST', $head = "FORM", $https = true)
+function doCurl($url, $params, $method = 'POST', $head = "FORM", $https = true)
 {
     $query_string = is_array($params) ? http_build_query($params) : $params;
     $curl         = curl_init();
@@ -285,9 +285,7 @@ function do_curl($url, $params, $method = 'POST', $head = "FORM", $https = true)
     if ($head == 'FORM') {
         $headers = array('Content-Type:application/x-www-form-urlencoded');
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-    } else
-
-    if ($head == 'JSON') {
+    } else if ($head == 'JSON') {
         $headers = array("Content-Type:application/json;charset=UTF-8");
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     }
