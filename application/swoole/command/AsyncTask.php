@@ -2,12 +2,9 @@
 
 namespace app\swoole\command;
 
-use app\common\MailBit;
-use app\common\SmsMkt;
 use think\console\Command;
 use think\console\Input;
 use think\console\Output;
-use think\Db;
 
 class AsyncTask extends Command
 {
@@ -80,12 +77,13 @@ class AsyncTask extends Command
         $pkinfo     = $data['pkinfo'];
         $key        = json_decode($pkinfo, true);
 
+        $ret = false;
         switch ($platform) {
             case 'smsmkt':
-                $ret = SmsMkt::send_sms($phone, $content, $key['sender'], $key['api_key'], $key['secret_key']);
+                // $ret = SmsMkt::send_sms($phone, $content, $key['sender'], $key['api_key'], $key['secret_key']);
                 break;
             case 'mailbit':
-                $ret = MailBit::send_sms($phone, $content, $key['from'], $key['username'], $key['password']);
+                // $ret = MailBit::send_sms($phone, $content, $key['from'], $key['username'], $key['password']);
                 break;
                 // other
             default:
@@ -94,7 +92,7 @@ class AsyncTask extends Command
         }
 
         $status = $ret == true ? 1 : 2;
-        Db::execute("UPDATE `tools_sms_phone` SET `status`=? WHERE `task_id` = ?  AND `phone` = ?", [$status, $id, $phone]);
+        // Db::execute("UPDATE `tools_sms_phone` SET `status`=? WHERE `task_id` = ?  AND `phone` = ?", [$status, $id, $phone]);
 
         echo "sms.send.msg:db.update.status=$status" . PHP_EOL;
     }
