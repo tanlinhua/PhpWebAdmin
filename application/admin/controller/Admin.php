@@ -27,6 +27,17 @@ class Admin extends Base
     // 增
     public function add()
     {
+        $data = input('post.');
+        $vResult = $this->validate($data, 'Admin.add');
+        if (true !== $vResult) {
+            return error($vResult);
+        }
+
+        $result = $this->adminModel->isUpdate(false)->data($data, true)->save(); // ->data第二个参数为true的时候才会触发修改器
+        if ($result > 0) {
+            return success();
+        }
+        return error();
     }
 
     // 删
@@ -49,6 +60,17 @@ class Admin extends Base
     // 改
     public function update()
     {
+        $data = input('post.');
+        $vResult = $this->validate($data, 'Admin.update');
+        if (true !== $vResult) {
+            return error($vResult);
+        }
+        $data = array_filter_empty_string($data);
+        $result = $this->adminModel->isUpdate(true)->data($data, true)->save();
+        if ($result > 0) {
+            return success();
+        }
+        return error();
     }
 
     // 查
