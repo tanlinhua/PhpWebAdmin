@@ -23,6 +23,6 @@ class Index extends Controller
 
     public function hello()
     {
-        return 'hello';
+        return 'index.index.hello';
     }
 }

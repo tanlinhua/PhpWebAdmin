@@ -2,15 +2,17 @@
 
 use think\Route;
 
-// 注意：要先application/config.php 开启 域名部署(url_domain_deploy => true)
+// 注意：要先application/config.php 
 // true开启混合模式路由,false关闭路由   'url_route_on' => true,
 // 强制路由模式 'url_route_must'=>  true,
-// 路由配置文件（默认route，支持配置多个） 'route_config_file'      => ['route','route_api'],
+
+// 开启 域名部署(url_domain_deploy => true)
 // Route::domain('api', 'api'); //绑定前端模块
 // Route::domain('admin', 'admin'); //绑定后端模块
 
 // 生成路由缓存 > php think optimize:route
 
+// Miss路由
 Route::miss("/miss");
 Route::get('miss', 'index/Index/miss');
 
@@ -56,7 +58,12 @@ Route::group('admin', [
     'params/get'       => ['admin/Params/get', ['method' => 'get']], //查
 ]);
 
+// Api
+Route::group('api', [
+    'test'   => ['api/Test/hello', ['method' => 'get']],
+]);
+
 // Index
 Route::group('index', [
-    'hello'   => ['index/Index/hello', ['method' => 'get']],
+    'test'   => ['index/Index/hello', ['method' => 'get']],
 ]);
