@@ -33,11 +33,11 @@ Route::group('admin', [
     'cpw'           => ['admin/Main/doCPW', ['method' => 'post']], //修改密码
 
     //用户管理
-    'adm/view'      => ['admin/Adm/index', ['method' => 'get']],
-    'adm/add'       => ['admin/Adm/add', ['method' => 'post']], //增
-    'adm/del'       => ['admin/Adm/del', ['method' => 'get']], //删
-    'adm/update'    => ['admin/Adm/update', ['method' => 'post']], //改
-    'adm/get'       => ['admin/Adm/get', ['method' => 'get']], //查
+    'adm/view'      => ['admin/Admin/index', ['method' => 'get']],
+    'adm/add'       => ['admin/Admin/add', ['method' => 'post']], //增
+    'adm/del'       => ['admin/Admin/del', ['method' => 'get']], //删
+    'adm/update'    => ['admin/Admin/update', ['method' => 'post']], //改
+    'adm/get'       => ['admin/Admin/get', ['method' => 'get']], //查
 
     //角色管理
     'role/view'      => ['admin/Role/index', ['method' => 'get']],
