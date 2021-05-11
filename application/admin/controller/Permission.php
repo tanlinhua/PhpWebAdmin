@@ -23,18 +23,13 @@ class Permission extends Base
 
     public function get()
     {
-        $inputPage      = trim(input('page'));      //分页
-        $inputLimits    = trim(input('limit'));     //分页数量
-        $search         = trim(input("search"));    //检索
+        $roleid = trim(input('roleid'));    //角色ID
+        $page   = trim(input('page'));      //分页
+        $limit  = trim(input('limit'));     //分页数量
+        $search = trim(input("search"));    //检索
 
-        $limits = 10;
-        if (!empty($inputLimits)) {
-            $limits = $inputLimits;
-        }
-
-        $page = 1;
-        if (!empty($inputPage)) {
-            $page = ($inputPage - 1) * $limits;
+        if (!empty($roleid)) {
+            return $this->tree();
         }
 
         $whereSearch = " 1=1 ";
@@ -42,10 +37,12 @@ class Permission extends Base
             $whereSearch = " `name` LIKE '%$search%' ";
         }
 
-        $total = db('permission')->where($whereSearch)->count();
+        $result = db('permission')->where($whereSearch)->paginate($limit, false, ['page'  => $page]);
+        return success('success', $result->total(), $result->items());
+    }
 
-        $result = db('permission')->where($whereSearch)->limit($page, $limits)->select();
-
-        return success('success', $total, $result);
+    private function tree()
+    {
+        return success('success', 0, null);
     }
 }
