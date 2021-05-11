@@ -42,7 +42,7 @@ class Admin extends Base
 
         $result = db('admin')->alias('a')->join('role r', 'a.role=r.id', 'left')
             ->where('a.role', 'NEQ', 0)->order('a.id asc')
-            ->field('a.id,user_name,role_name,created_at,updated_at,last_login_time,last_login_ip,status')
+            ->field('a.id,role,user_name,role_name,created_at,updated_at,last_login_time,last_login_ip,status')
             ->where($whereSearch)->paginate($limits, false, ['page'  => $page]); // 如果用model,一句sql搞不定,怎么破?
 
         return success('success', $result->total(), $result->items());
