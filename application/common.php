@@ -329,3 +329,22 @@ function doCurl($url, $params, $method = 'POST', $head = "FORM", $https = true)
     curl_close($curl);
     return ['ret' => true, 'data' => $ret];
 }
+
+/**
+ * 过滤数组空字符串值(删除空值key)
+ * @param array $arr
+ * @return array $allowArr
+ */
+function array_filter_empty_string($arr)
+{
+    $allowArr = [];
+
+    if (is_array($arr)) {
+        foreach ($arr as $k => $v) {
+            if ((is_string($v) && '' !== $v) || !is_string($v)) {
+                $allowArr[$k] = $v;
+            }
+        }
+    }
+    return $allowArr;
+}
