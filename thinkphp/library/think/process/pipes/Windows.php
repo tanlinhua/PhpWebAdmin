@@ -160,6 +160,9 @@ class Windows extends Pipes
     private function removeFiles()
     {
         foreach ($this->files as $filename) {
+            if (is_object($filename)) {
+                continue;
+            }
             if (file_exists($filename)) {
                 @unlink($filename);
             }
