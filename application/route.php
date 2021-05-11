@@ -49,6 +49,7 @@ Route::group('admin', [
     //权限管理
     'per/view'      => ['admin/Permission/index', ['method' => 'get']],
     'per/get'       => ['admin/Permission/get', ['method' => 'get']], //查
+    'per/tree'      => ['admin/Permission/tree', ['method' => 'get']], //tree
 
     //参数配置
     'params/view'      => ['admin/Params/index', ['method' => 'get']],

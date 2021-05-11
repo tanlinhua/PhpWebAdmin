@@ -4,45 +4,36 @@ namespace app\admin\controller;
 
 class Permission extends Base
 {
+    // view
     public function index()
     {
         return view();
     }
 
-    public function add()
-    {
-    }
-
-    public function del()
-    {
-    }
-
-    public function update()
-    {
-    }
-
+    // read
     public function get()
     {
-        $roleid = trim(input('roleid'));    //角色ID
+        $vResult = $this->validate(input('get.'), 'Permission.get');
+        if (true !== $vResult) {
+            return error($vResult);
+        }
+
         $page   = trim(input('page'));      //分页
-        $limit  = trim(input('limit'));     //分页数量
+        $limits = trim(input('limit'));     //分页数量
         $search = trim(input("search"));    //检索
 
-        if (!empty($roleid)) {
-            return $this->tree();
-        }
-
-        $whereSearch = " 1=1 ";
+        $db = db('permission');
         if (!empty($search)) {
-            $whereSearch = " `name` LIKE '%$search%' ";
+            $db = $db->where('name', 'LIKE', "%$search%");
         }
 
-        $result = db('permission')->where($whereSearch)->paginate($limit, false, ['page'  => $page]);
+        $result = $db->paginate($limits, false, ['page'  => $page]);
         return success('success', $result->total(), $result->items());
     }
 
-    private function tree()
+    // 获取树形菜单数据
+    public function tree()
     {
-        return success('success', 0, null);
+        return error();
     }
 }

@@ -7,17 +7,15 @@ use think\Validate;
 class Permission extends Validate
 {
     protected $rule =   [
-        'id|ID'            => 'require|number',
         'page|页码'        => 'require|number|>:0',
         'limit|分页数量'    => 'require|number|>:0',
+        'roleid|角色ID'     => 'require|number|>:0',
     ];
 
-    protected $message  =   [
-        // 'name.require' => '名称必须',
-    ];
+    protected $message  =   [];
 
     protected $scene = [
-        'get'  =>  ['page', 'limit'],
-        'del'  =>  ['id'],
+        'get'   =>  ['page', 'limit'],
+        'tree'  =>  ['roleid'],
     ];
 }
