@@ -2,11 +2,22 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\Admin as ModelAdmin;
+
 /**
  * 后台用户管理
  */
 class Admin extends Base
 {
+    protected $adminModel;
+
+    // 构造
+    public function __construct()
+    {
+        parent::__construct();
+        $this->adminModel = new ModelAdmin();
+    }
+
     // view
     public function index()
     {
@@ -21,6 +32,18 @@ class Admin extends Base
     // 删
     public function del()
     {
+        $data = input('get.');
+
+        $vResult = $this->validate($data, 'Admin.del');
+        if (true !== $vResult) {
+            return error($vResult);
+        }
+
+        $result = $this->adminModel->destroy(['id' => $data['id']]);
+        if ($result > 0) {
+            return success();
+        }
+        return error();
     }
 
     // 改
@@ -31,6 +54,11 @@ class Admin extends Base
     // 查
     public function get()
     {
+        $vResult = $this->validate(input('get.'), 'Admin.get');
+        if (true !== $vResult) {
+            return error($vResult);
+        }
+
         $page   = trim(input('page'));      //分页
         $limits = trim(input('limit'));     //分页数量
         $search = trim(input("search"));    //检索
