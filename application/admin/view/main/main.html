@@ -41,35 +41,23 @@
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
 
+                    {foreach $menuTree as $item}
+                    {if condition="$item.checked eq true"}
                     <li class="layui-nav-item">
                         <a href="javascript:;">
-                            <i class="layui-icon">&#xe68e;</i>
-                            <em>主页</em>
+                            <i class="layui-icon">&#{$item.icon}</i>
+                            <em>{$item.name}</em>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="/admin/console">控制台</a></dd>
+                            {foreach $item.children as $child}
+                            {if condition="$child.checked eq true"}
+                            <dd><a href="{$child.uri}">{$child.name}</a></dd>
+                            {/if}
+                            {/foreach}
                         </dl>
                     </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe672;</i>
-                            <em>权限配置</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="/admin/adm/view">用户管理</a></dd>
-                            <dd><a href="/admin/role/view">角色管理</a></dd>
-                            <dd><a href="/admin/per/view">权限管理</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe716;</i>
-                            <em>系统配置</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="/admin/params/view">系统参数</a></dd>
-                        </dl>
-                    </li>
+                    {/if}
+                    {/foreach}
 
                 </ul>
             </div>
