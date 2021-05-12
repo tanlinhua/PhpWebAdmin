@@ -387,3 +387,26 @@ function checkApiSign($param = [])
 
     return $result;
 }
+
+/**
+ * 保存上传文件并返回本地存储路径
+ * @param   \think\File $file   [request()->file('img')]
+ * @param   string      $ext    文件后缀，多个用逗号分割或者数组
+ * @param   string      $type   文件MIME类型，多个用逗号分割或者数组
+ * @return  string      $uri    存储路径
+ */
+function saveUploadFile($file, $ext = 'jpg,png,gif,bmp,jpeg', $type = 'image/png,image/jpeg,image/gif,image/bmp')
+{
+    $uri = '';
+    $folder = 'uploads';
+    $info = $file->validate(['ext' => $ext, 'type' => $type])->move(ROOT_PATH . 'public' . DS . $folder);
+
+    if ($info) {
+        $uri = $folder . DS . $info->getSaveName();
+    } else {
+        $error = $file->getError();
+        trace('saveUploadFile.Error=' . $error, 'error');
+        return null;
+    }
+    return $uri;
+}
