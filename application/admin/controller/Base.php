@@ -74,4 +74,11 @@ class Base extends Controller
         }
         return $adminId;
     }
+
+    //获取当前用户的角色id
+    protected function getRoleId()
+    {
+        $role_id = db('admin')->where('id', $this->getAdminId())->value('role');
+        return $role_id;
+    }
 }
