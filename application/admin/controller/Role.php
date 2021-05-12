@@ -2,8 +2,18 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\Role as ModelRole;
+
 class Role extends Base
 {
+    protected $roleModel;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->roleModel = new ModelRole();
+    }
+
     public function index()
     {
         return view();
@@ -11,14 +21,43 @@ class Role extends Base
 
     public function add()
     {
+        $data = input('post.');
+        $vResult = $this->validate($data, 'Role.add');
+        if (true !== $vResult) {
+            return error($vResult);
+        }
+
+        $result = $this->roleModel->isUpdate(false)->data($data, true)->save();
+        if ($result > 0) {
+            return success();
+        }
+        return error();
     }
 
     public function del()
     {
+        $id = input('get.id');
+
+        $result = $this->roleModel->destroy(['id' => $id]);
+        if ($result > 0) {
+            return success();
+        }
+        return error();
     }
 
     public function update()
     {
+        $data = input('post.');
+        $vResult = $this->validate($data, 'Role.update');
+        if (true !== $vResult) {
+            return error($vResult);
+        }
+        $data = array_filter_empty_string($data);
+        $result = $this->roleModel->isUpdate(true)->data($data, true)->save();
+        if ($result > 0) {
+            return success();
+        }
+        return error();
     }
 
     public function get()
