@@ -348,3 +348,42 @@ function array_filter_empty_string($arr)
     }
     return $allowArr;
 }
+
+
+/**
+ * 接口校验
+ *
+ * @param array $param
+ * @return bool
+ */
+function checkApiSign($param = [])
+{
+    $signKey = "FUCK"; //接口验证key
+    $result = false;
+    $signstr = '';
+
+    if (!isset($param['sign'])) {
+        return $result;
+    }
+    $sign = $param['sign'];
+    unset($param['sign']);
+    ksort($param);
+
+    if (is_array($param)) {
+        foreach ($param as $key => $value) {
+            if ($value == '') {
+                continue;
+            }
+            $signstr .= $key . '=' . $value . '&';
+        }
+        // $signstr = rtrim($signstr, '&');
+    }
+    $signstr .= "key=$signKey";
+    $newSign = md5($signstr);
+
+    if (strcmp($sign, $newSign) == 0) {
+        $result = true;
+    }
+
+    return $result;
+}
