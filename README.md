@@ -20,7 +20,13 @@
 
 > [composer require workerman/workerman-for-win](http://doc.workerman.net/install/install.html)
 
-# 命令行
+# [Swoole框架](https://www.swoole.com/)
+
+> [easyswoole](https://www.easyswoole.com/)
+
+> [Hyperf](https://www.hyperf.io/)
+
+# [命令行](https://www.kancloud.cn/manual/thinkphp5/122951)
 
 > 生成类库映射文件,提高系统自动加载的性能   -> php think optimize:autoload
 
