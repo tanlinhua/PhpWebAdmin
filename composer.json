@@ -21,7 +21,8 @@
         "swoole/ide-helper": "@dev",
         "firebase/php-jwt": "^5.2",
         "phpgangsta/googleauthenticator": "dev-master",
-        "topthink/think-captcha": "1.*"
+        "topthink/think-captcha": "1.*",
+        "topthink/think-queue": "2.*"
     },
     "autoload": {
         "psr-4": {

@@ -300,6 +300,58 @@
             "install-path": "../topthink/think-captcha"
         },
         {
+            "name": "topthink/think-helper",
+            "version": "v3.1.4",
+            "version_normalized": "3.1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/top-think/think-helper.git",
+                "reference": "c28d37743bda4a0455286ca85b17b5791d626e10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/top-think/think-helper/zipball/c28d37743bda4a0455286ca85b17b5791d626e10",
+                "reference": "c28d37743bda4a0455286ca85b17b5791d626e10",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "time": "2019-11-08T08:01:10+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "think\\": "src"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "yunwuxin",
+                    "email": "448901948@qq.com"
+                }
+            ],
+            "description": "The ThinkPHP6 Helper Package",
+            "support": {
+                "issues": "https://github.com/top-think/think-helper/issues",
+                "source": "https://github.com/top-think/think-helper/tree/3.0"
+            },
+            "install-path": "../topthink/think-helper"
+        },
+        {
             "name": "topthink/think-installer",
             "version": "v1.0.14",
             "version_normalized": "1.0.14.0",
@@ -352,6 +404,64 @@
                 "source": "https://github.com/top-think/think-installer/tree/v1.0.14"
             },
             "install-path": "../topthink/think-installer"
+        },
+        {
+            "name": "topthink/think-queue",
+            "version": "v2.0.3",
+            "version_normalized": "2.0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/top-think/think-queue.git",
+                "reference": "465320c9cb7811df22d4ff8f29f58ead7d104348"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/top-think/think-queue/zipball/465320c9cb7811df22d4ff8f29f58ead7d104348",
+                "reference": "465320c9cb7811df22d4ff8f29f58ead7d104348",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "topthink/think-helper": ">=1.0.4",
+                "topthink/think-installer": ">=1.0.10"
+            },
+            "time": "2018-05-04T05:29:53+00:00",
+            "type": "think-extend",
+            "extra": {
+                "think-config": {
+                    "queue": "src/config.php"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "think\\": "src"
+                },
+                "files": [
+                    "src/common.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "yunwuxin",
+                    "email": "448901948@qq.com"
+                }
+            ],
+            "description": "The ThinkPHP5 Queue Package",
+            "support": {
+                "issues": "https://github.com/top-think/think-queue/issues",
+                "source": "https://github.com/top-think/think-queue/tree/master"
+            },
+            "install-path": "../topthink/think-queue"
         }
     ],
     "dev": true,

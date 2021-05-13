@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '330c76ef0c4c33f61367f54c9b5a79c8701d6154',
+    'reference' => '598ec0b8d383f62ac64b7471c34a00ad2ba1ccf7',
     'name' => 'topthink/think',
   ),
   'versions' => 
@@ -56,7 +56,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '330c76ef0c4c33f61367f54c9b5a79c8701d6154',
+      'reference' => '598ec0b8d383f62ac64b7471c34a00ad2ba1ccf7',
     ),
     'topthink/think-captcha' => 
     array (
@@ -67,6 +67,15 @@
       ),
       'reference' => '1d64363c814c92f6086c4fa5e3223fe7e23db09d',
     ),
+    'topthink/think-helper' => 
+    array (
+      'pretty_version' => 'v3.1.4',
+      'version' => '3.1.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c28d37743bda4a0455286ca85b17b5791d626e10',
+    ),
     'topthink/think-installer' => 
     array (
       'pretty_version' => 'v1.0.14',
@@ -75,6 +84,15 @@
       array (
       ),
       'reference' => 'eae1740ac264a55c06134b6685dfb9f837d004d1',
+    ),
+    'topthink/think-queue' => 
+    array (
+      'pretty_version' => 'v2.0.3',
+      'version' => '2.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '465320c9cb7811df22d4ff8f29f58ead7d104348',
     ),
   ),
 );
