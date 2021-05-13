@@ -1,6 +1,6 @@
 <?php
 
-namespace app\jobs\controller;
+namespace app\common\fcm;
 
 class Push2
 {
