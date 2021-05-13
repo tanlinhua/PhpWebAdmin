@@ -1,0 +1,1 @@
+rewrite "^/(\S{1,7})$" /index.php?code=$1 last;
