@@ -35,7 +35,7 @@ class Base extends Controller
             // 2.校验后台操作权限
             $check = $this->checkPermission($dbAdm['role']);
             if (!$check) {
-                exit('{"code":401,"msg":"暂无权限"}');
+                exit('{"code":401,"msg":"权限不足"}');
             }
 
             // 3.校验admin表用户状态
