@@ -200,7 +200,7 @@
     //初始化tree
     function initTree(roleId) {
         $.ajax({
-            url: "/admin/per/tree",
+            url: "/admin/per/get",
             type: "GET",
             dataType: "json",
             data: { roleid: roleId },

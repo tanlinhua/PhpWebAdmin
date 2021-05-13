@@ -13,7 +13,12 @@ class Permission extends Base
     // read
     public function get()
     {
-        $vResult = $this->validate(input('get.'), 'Permission.get');
+        $data = input('get.');
+        if (isset($data['roleid'])) {
+            return $this->tree($data['roleid']);
+        }
+
+        $vResult = $this->validate($data, 'Permission.get');
         if (true !== $vResult) {
             return error($vResult);
         }
