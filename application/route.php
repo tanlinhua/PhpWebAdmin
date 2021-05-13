@@ -68,3 +68,8 @@ Route::group('api', [
 Route::group('index', [
     'test'   => ['index/Index/hello', ['method' => 'get']],
 ]);
+
+// Cron
+Route::group('cron', [
+    'clean'   => ['cron/Clean/index', ['method' => 'get']],
+]);
