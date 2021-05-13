@@ -1,6 +1,9 @@
 <?php
 
-namespace app\jobs\controller;
+namespace app\cron\controller;
+
+use app\common\fcm\Push1;
+use app\common\fcm\Push2;
 
 /**
  * Fcm.Push
@@ -10,15 +13,15 @@ class Push
     private $mPushFlag = 1; // 0=>关闭; 1=>单次联网批量用户模式; 2=>批量联网批量用户模式
 
     /**
-     * 定时任务,执行FCM唤醒
-     * jobs/push?key=ak47
+     * 定时任务,执行FCM
+     * cron/push?key=ak47
      */
     public function index($key = '')
     {
         if ('ak47' != $key) {
             return error('do something');
         }
-        $ms1 = getCurrMsTime();
+        debug('push_begin');
 
         ini_set('memory_limit', '1024M');
         ini_set('max_execution_time', 60 * 20);
@@ -51,8 +54,9 @@ class Push
             trace("select $this->mPushFlag", 'notice');
         }
 
-        $ms2 = getCurrMsTime();
-        $response = "运行时间=" . (($ms2 - $ms1) / 1000) . '秒' . "<br> $pushResult \r\n";
+        debug('push_end');
+        $runTime = debug('push_begin', 'push_end', 6) . 's';
+        $response = "运行时间=" . $runTime . "<br> $pushResult \r\n";
         trace($response, 'notice');
         return $response;
     }
