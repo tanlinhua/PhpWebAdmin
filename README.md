@@ -8,13 +8,13 @@
 
 > composer require "phpgangsta/googleauthenticator:dev-master"
 
+> [composer require topthink/think-queue=2.*](https://www.cnblogs.com/gyfluck/p/14024580.html)
+
 # 一些可能有用的扩展:👇
 
 > [composer require phpmailer/phpmailer](https://packagist.org/packages/phpmailer/phpmailer)
 
 > [composer require guzzlehttp/guzzle](https://blog.csdn.net/weixin_43967933/article/details/89094935)
-
-> [composer require topthink/think-queue=2.*](https://www.cnblogs.com/gyfluck/p/14024580.html)
 
 > [composer require topthink/think-worker](https://www.kancloud.cn/manual/thinkphp5/235128)
 
