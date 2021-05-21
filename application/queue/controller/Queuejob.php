@@ -14,6 +14,7 @@ class Queuejob
      */
     public function fire(Job $job, $data)
     {
+        trace($data, 'error');
         //这里$data定义格式为：$data = [ 'type'=>1, 'data_id' => 123,'ts' => time()]
         if (empty($data)) {
             return 0;
