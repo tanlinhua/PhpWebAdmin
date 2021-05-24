@@ -12,6 +12,12 @@
 
 # 一些可能有用的扩展:👇
 
+> [一个PHP文件搞定支付宝支付系列](https://github.com/dedemao/alipay)
+
+> [一个PHP文件搞定微信支付系列](https://github.com/dedemao/weixinPay)
+
+> [composer require yansongda/pay -vvv](https://github.com/yansongda/pay)
+
 > [composer require phpmailer/phpmailer](https://packagist.org/packages/phpmailer/phpmailer)
 
 > [composer require guzzlehttp/guzzle](https://blog.csdn.net/weixin_43967933/article/details/89094935)
@@ -19,6 +25,8 @@
 > [composer require topthink/think-worker](https://www.kancloud.cn/manual/thinkphp5/235128)
 
 > [composer require workerman/workerman-for-win](http://doc.workerman.net/install/install.html)
+
+> [composer require alibabacloud/dysmsapi-20170525](https://help.aliyun.com/document_detail/215762.html?spm=a2c4g.11186623.6.661.8bdb40cdR45lKi)
 
 # [Swoole框架](https://www.swoole.com/)
 
