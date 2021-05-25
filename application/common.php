@@ -410,3 +410,17 @@ function save_upload_file($file, $ext = 'jpg,png,gif,bmp,jpeg', $type = 'image/p
     }
     return $uri;
 }
+
+/**
+ * 过滤掉emoji表情
+ *
+ * @param   string $source
+ * @return  string $str
+ */
+function emoji_filter($source)
+{
+    $filter = preg_replace_callback('/./u', function (array $match) {
+        return strlen($match[0]) >= 4 ? '' : $match[0];
+    }, $source);
+    return $filter;
+}
