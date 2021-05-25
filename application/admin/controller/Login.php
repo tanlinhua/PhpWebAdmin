@@ -48,7 +48,7 @@ class Login extends Controller
     private function verifyGoogleAuth($code = '')
     {
         $ga             = new PHPGangsta_GoogleAuthenticator();
-        $data           = json_decode(getSysParamsValue('GoogleAuthenticator'), true);
+        $data           = json_decode(get_sys_params_value('GoogleAuthenticator'), true);
         $checkResult    = $ga->verifyCode($data['secret'], $code, 2); // 2 = 2*30sec clock tolerance
         if ($checkResult) {
             return true;
@@ -105,7 +105,7 @@ class Login extends Controller
         session("admin_username", $admin["user_name"]);
 
         $data["last_login_time"] = date("Y-m-d H:i:s", time());
-        $data["last_login_ip"] = getClientIp();
+        $data["last_login_ip"] = get_client_ip();
         db("admin")->where("id", $admin["id"])->update($data);
         return success('登陆成功');
     }

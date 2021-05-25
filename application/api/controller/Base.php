@@ -40,7 +40,7 @@ class Base extends Controller
                 if ($find['status'] == 0) {
                     exit('{"code":0,"msg":"statusError"}'); //用户被封禁
                 } else {
-                    db('user')->where('id', $this->user_id)->update(['updated_at' => getCurrDateTime()]);
+                    db('user')->where('id', $this->user_id)->update(['updated_at' => get_curr_date_time()]);
                 }
             }
         } catch (Exception $e) {

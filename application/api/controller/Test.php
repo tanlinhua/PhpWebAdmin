@@ -19,13 +19,13 @@ class Test extends Base
     public function sms()
     {
         //安全验证
-        $result = checkApiSign(request()->param());
+        $result = check_api_sign(request()->param());
         if (!$result) {
             return error("fuck u");
         }
 
         //单IP一小时内只能访问10次
-        $ip = getClientIp();
+        $ip = get_client_ip();
         $count = Cache::get($ip, 0);
         if ($count >= 10) {
             return error("exit");

@@ -45,7 +45,7 @@ function error($msg = 'fail', $code = -1)
  *
  * @return string
  */
-function getClientIp()
+function get_client_ip()
 {
     if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
         $cip = $_SERVER["HTTP_CLIENT_IP"];
@@ -68,7 +68,7 @@ function getClientIp()
  * 
  * @return dateTime
  */
-function getCurrDateTime()
+function get_curr_date_time()
 {
     return date("Y-m-d H:i:s", time());
 }
@@ -79,7 +79,7 @@ function getCurrDateTime()
  * @param string $phone
  * @return boolean
  */
-function isPhone($phone = '')
+function is_phone_china($phone = '')
 {
     $search = '/^0?1[3|4|5|6|7|8][0-9]\d{8}$/';
     if (preg_match($search, $phone)) {
@@ -95,7 +95,7 @@ function isPhone($phone = '')
  * @param int $length
  * @return string
  */
-function makeRandomString($length = 8)
+function make_random_string($length = 8)
 {
     $str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
     $randStr = str_shuffle($str); //打乱字符串
@@ -108,7 +108,7 @@ function makeRandomString($length = 8)
  * @param  string $data
  * @return jwt
  */
-function makeJWT($data = '')
+function make_jwt($data = '')
 {
     $key     = config('jwt.key');
     $time    = time();
@@ -130,7 +130,7 @@ function makeJWT($data = '')
  * 
  * @return 订单编号
  */
-function makeOrderNo()
+function make_order_number()
 {
     $yCode = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
     $orderSn = $yCode[intval(date('Y')) - 2011] . strtoupper(dechex(date('m'))) . date('d') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf('%04d', rand(0, 9999));
@@ -144,7 +144,7 @@ function makeOrderNo()
  * @param  string   $key
  * @return string
  */
-function getSysParamsValue($key)
+function get_sys_params_value($key)
 {
     $value = db("sys_params")->where("key", "{$key}")->value('value');
     return $value;
@@ -156,7 +156,7 @@ function getSysParamsValue($key)
  * @param string $filePath -> $filePath = 'uploads' . DS . $info->getSaveName();
  * @return array
  */
-function csvGet($filePath)
+function csv_input($filePath)
 {
     $handle = fopen($filePath, 'r');
 
@@ -179,7 +179,7 @@ function csvGet($filePath)
  * @param array $data
  * @return void
  */
-function csvOut($filename, $data)
+function csv_output($filename, $data)
 {
     $filename = $filename . '-' . date("YmdHis", time()) . '-导出.csv'; //文件名
     header("Content-type:text/csv");
@@ -198,7 +198,7 @@ function csvOut($filename, $data)
  * @param string md5($iv)
  * @return string
  */
-function encryptString($str, $key = "ak47", $iv = "m416")
+function encrypt_string($str, $key = "ak47", $iv = "m416")
 {
     $base = base64_encode(openssl_encrypt($str, 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16)));
     return $base;
@@ -212,7 +212,7 @@ function encryptString($str, $key = "ak47", $iv = "m416")
  * @param string md5($iv)
  * @return String
  */
-function decryptString($encryptedText,  $key = "ak47", $iv = "m416")
+function decrypt_string($encryptedText,  $key = "ak47", $iv = "m416")
 {
     $str = openssl_decrypt(base64_decode($encryptedText), 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16));
     return $str;
@@ -225,7 +225,7 @@ function decryptString($encryptedText,  $key = "ak47", $iv = "m416")
  * @param array $datas
  * @return void
  */
-function setRedisList($taskId, $datas)
+function set_redis_list($taskId, $datas)
 {
     $redis  = Cache::getHandler();
     $key    = "Task" . $taskId;
@@ -241,7 +241,7 @@ function setRedisList($taskId, $datas)
  * @param string $taskId
  * @return string
  */
-function getRedisList($taskId)
+function get_redis_list($taskId)
 {
     $redis      = Cache::getHandler();
     $redisKey   = "Task" . $taskId;
@@ -255,7 +255,7 @@ function getRedisList($taskId)
  * @param string $taskId
  * @return void
  */
-function cleanRedisList($taskId)
+function clean_redis_list($taskId)
 {
     $redis  = Cache::getHandler();
     $key    = "Task" . $taskId;
@@ -277,7 +277,7 @@ function cleanRedisList($taskId)
  * @param  boolean $https
  * @return array
  */
-function doCurl($url, $params, $method = 'POST', $head = "FORM", $https = true)
+function do_curl($url, $params, $method = 'POST', $head = "FORM", $https = true)
 {
     $query_string = is_array($params) ? http_build_query($params) : $params;
     $curl         = curl_init();
@@ -356,7 +356,7 @@ function array_filter_empty_string($arr)
  * @param array $param
  * @return bool
  */
-function checkApiSign($param = [])
+function check_api_sign($param = [])
 {
     $signKey = "FUCK"; //接口验证key
     $result = false;
@@ -395,7 +395,7 @@ function checkApiSign($param = [])
  * @param   string      $type   文件MIME类型，多个用逗号分割或者数组
  * @return  string      $uri    存储路径
  */
-function saveUploadFile($file, $ext = 'jpg,png,gif,bmp,jpeg', $type = 'image/png,image/jpeg,image/gif,image/bmp')
+function save_upload_file($file, $ext = 'jpg,png,gif,bmp,jpeg', $type = 'image/png,image/jpeg,image/gif,image/bmp')
 {
     $uri = '';
     $folder = 'uploads';
