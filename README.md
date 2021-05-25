@@ -44,7 +44,7 @@
 
 # 性能调试
 
-```
+```php
 debug('begin');
 // ...其他代码段
 debug('end');
@@ -54,6 +54,13 @@ echo debug('begin','end').'s';      // 默认的统计精度是小数点后4位 
 echo debug('begin','end',6).'s';    // 设置时间精度 (0.005587s)
 echo debug('begin','end','m');      // 内存占用情况 (0.838KB)
 ```
+
+# 漏洞记录
+
+### ThinkPHP < 5.0.24 远程代码执行高危漏洞
+- https://www.freebuf.com/vuls/194127.html
+- https://www.zhangweijiang.com/article/3.html
+- https://xz.aliyun.com/t/6106
 
 # TODO:
 
