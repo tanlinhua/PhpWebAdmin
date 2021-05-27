@@ -103,7 +103,7 @@ class File
                 } catch (\Exception $e) {
                 }
             } else {
-                $filename = date('Ym') . DIRECTORY_SEPARATOR . date('d') . $cli . '.log';
+                $filename = date('Ymd') . DIRECTORY_SEPARATOR . date('d') . $cli . '.log';
             }
 
             $destination = $this->config['path'] . $filename;
@@ -251,7 +251,6 @@ class File
                     'memory'  => $memory_use . 'kb',
                     'file'    => count(get_included_files()),
                 ] + $info;
-
             } elseif (!$apart) {
                 // 增加额外的调试信息
                 $runtime = round(microtime(true) - THINK_START_TIME, 10);
