@@ -14,7 +14,7 @@ class Queuejob
      */
     public function fire(Job $job, $data)
     {
-        trace($data, 'error');
+        trace($data, 'notice');
         //这里$data定义格式为：$data = [ 'type'=>1, 'data_id' => 123,'ts' => time()]
         if (empty($data)) {
             return 0;
@@ -50,29 +50,29 @@ class Queuejob
         }
     }
 
+    // 任务达到最大重试次数后，失败了
     public function failed($data)
     {
-        // ...任务达到最大重试次数后，失败了
     }
 
     //发邮件业务
     private function sendEmail($id)
     {
-        trace('sendEmail', 'error');
+        trace('sendEmail', 'notice');
         return true;
     }
 
     //发App消息业务
     private function sendAppMessage($id)
     {
-        trace('sendAppMessage', 'error');
+        trace('sendAppMessage', 'notice');
         return true;
     }
 
     //处理订单业务
     private function orderService($id)
     {
-        trace('orderService', 'error');
+        trace('orderService', 'notice');
         return true;
     }
 }
