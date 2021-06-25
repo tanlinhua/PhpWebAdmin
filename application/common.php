@@ -147,6 +147,8 @@ function make_order_number()
 function get_sys_params_value($key)
 {
     $value = db("sys_params")->where("key", "{$key}")->value('value');
+    $value = stripslashes($value);
+    $value = htmlspecialchars_decode($value);
     return $value;
 }
 
