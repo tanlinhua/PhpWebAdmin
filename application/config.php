@@ -156,7 +156,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 异常页面的模板文件
-    'exception_tmpl'         => THINK_PATH . 'tpl' . DS . 'think_exception.tpl',
+    'exception_tmpl'         => THINK_PATH . 'tpl' . DS . 'think_exception_2.tpl',
 
     // 错误显示信息,非调试模式有效
     'error_message'          => '出现未知错误,请通知系统管理员.',
