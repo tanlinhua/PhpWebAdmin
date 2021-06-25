@@ -28,6 +28,8 @@
 
 > [composer require alibabacloud/dysmsapi-20170525](https://help.aliyun.com/document_detail/215762.html?spm=a2c4g.11186623.6.661.8bdb40cdR45lKi)
 
+> [composer require predis/predis](http://packagist.p2hp.com/packages/predis/predis)
+
 # [Swoole框架](https://www.swoole.com/)
 
 > [easyswoole](https://www.easyswoole.com/)
@@ -56,6 +58,27 @@ echo debug('begin','end','m');      // 内存占用情况 (0.838KB)
 ```
 
 # 漏洞记录
+### 修复记录
+```php
+thinkphp\library\think\process\pipes\Windows.php
+/**
+ * 删除临时文件
+ */
+private function removeFiles()
+{
+    foreach ($this->files as $filename) {
+        // 开始
+        if (is_object($filename)) {
+            continue;
+        }
+        // 结束
+        if (file_exists($filename)) {
+            @unlink($filename);
+        }
+    }
+    $this->files = [];
+}
+```
 
 ### ThinkPHP < 5.0.24 远程代码执行高危漏洞
 - https://www.freebuf.com/vuls/194127.html
