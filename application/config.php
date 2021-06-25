@@ -41,9 +41,9 @@ return [
     // 是否开启多语言
     'lang_switch_on'         => false,
     // 默认全局过滤方法 用逗号分隔多个
-    // strip_tags: 剥去字符串中的 HTML 标签
-    // addslashes: 防SQL注入，在每个双引号（"）前添加反斜杠
-    // htmlspecialchars: 防XSS攻击，尖括号等转义过滤
+    // strip_tags: 剥去字符串中的 HTML 标签 
+    // addslashes: 防SQL注入，在每个双引号（"）前添加反斜杠      [还原:stripslashes]
+    // htmlspecialchars: 防XSS攻击，尖括号等转义过滤           [还原:htmlspecialchars_decode]
     'default_filter'         => 'strip_tags,addslashes,htmlspecialchars',
     // 默认语言
     'default_lang'           => 'zh-cn',
