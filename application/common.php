@@ -219,47 +219,62 @@ function decrypt_string($encryptedText,  $key = "ak47", $iv = "m416")
 }
 
 /**
- * 将任务数据加入到 redis list
- *
+ * 在队列尾部插入一个元素
+ * 
  * @param string $taskId
  * @param array $datas
- * @return void
+ * @return int $length (队列长度)
  */
-function set_redis_list($taskId, $datas)
+function redis_list_rpush($taskId, $datas)
 {
-    $redis  = Cache::getHandler();
+    $redis = Cache::store('redis')->handler();
     $key    = "Task" . $taskId;
     foreach ($datas as $phone) {
-        $result = $redis->rPush($key, $phone);
+        $length = $redis->rPush($key, $phone);
     }
-    trace("新增RedisList:$key,length=$result", 'notice');
+    trace("新增RedisList:$key,length=$length", 'notice');
+    return $length;
 }
 
 /**
- * 获取redis list中的的值(删除并返回队列中的头元素)
- *
+ * 删除并返回队列中的头元素
+ * 
  * @param string $taskId
  * @return string
  */
-function get_redis_list($taskId)
+function redis_list_lpop($taskId)
 {
-    $redis      = Cache::getHandler();
+    $redis      = Cache::store('redis')->handler();
     $redisKey   = "Task" . $taskId;
     $value      = $redis->lPop($redisKey);
     return $value;
 }
 
 /**
- * 清空 redis list 数据
+ * 获取列表长度
  *
+ * @param string $taskId
+ * @return int $length
+ */
+function redis_list_llen($taskId)
+{
+    $redis      = Cache::store('redis')->handler();
+    $redisKey   = "Task" . $taskId;
+    $length     = $redis->lLen($redisKey);
+    return $length;
+}
+
+/**
+ * 清空list
+ * 
  * @param string $taskId
  * @return void
  */
-function clean_redis_list($taskId)
+function redis_list_clean($taskId)
 {
-    $redis  = Cache::getHandler();
+    $redis  = Cache::store('redis')->handler();
     $key    = "Task" . $taskId;
-    $result = $redis->lTrim($key);
+    $result = $redis->lTrim($key, 1, 0);
     if ($result) {
         trace("删除RedisList:$key 成功", 'notice');
     } else {

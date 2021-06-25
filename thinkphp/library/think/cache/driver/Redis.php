@@ -185,42 +185,4 @@ class Redis extends Driver
         return $this->handler->flushDB();
     }
 
-    /**
-     * 删除并返回队列中的头元素
-     * @param string $key
-     */
-    public function lPop($key)
-    {
-        return $this->handler->lPop($key);
-    }
-
-    /**
-     * 在队列尾部插入一个元素
-     * @param string $key
-     * @param string $value
-     * 返回队列长度
-     */
-    public function rPush($key, $value)
-    {
-        return $this->handler->rPush($key, $value);
-    }
-
-    /**
-     * 返回队列长度
-     * @param string $key
-     */
-    public function lLen($key)
-    {
-        return $this->handler->lLen($key);
-    }
-
-    /**
-     * 清空list
-     *
-     * @param string $key
-     */
-    public function lTrim($key)
-    {
-        return $this->handler()->lTrim($key, 1, 0);
-    }
 }

@@ -244,14 +244,4 @@ class Cache
         return self::init()->tag($name, $keys, $overlay);
     }
 
-    /**
-     * 返回redis对象
-     *
-     * @return obj
-     */
-    public static function getHandler()
-    {
-        self::init();
-        return self::$handler;
-    }
 }
