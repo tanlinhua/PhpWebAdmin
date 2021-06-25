@@ -32,6 +32,10 @@ class Admin extends Base
         if (true !== $vResult) {
             return error($vResult);
         }
+        $admId = $this->getAdminId();
+        if ($admId != config('admin.id')) {
+            $data['pid'] = $admId; // 非超级管理员新增的用户的上级ID只能为该用户
+        }
 
         $result = $this->adminModel->isUpdate(false)->data($data, true)->save(); // ->data第二个参数为true的时候才会触发修改器
         if ($result > 0) {
@@ -84,13 +88,28 @@ class Admin extends Base
         $page   = trim(input('page'));      //分页
         $limits = trim(input('limit'));     //分页数量
         $search = trim(input("search"));    //检索
+        $role   = trim(input("role"));      //角色
 
         $db = db('admin')->alias('a')->join('role r', 'a.role=r.id', 'left')
             ->where('a.role', 'NEQ', 0)->order('a.id asc')
-            ->field('a.id,role,user_name,role_name,created_at,updated_at,last_login_time,last_login_ip,status');
+            ->field('a.id,role,pid,user_name,role_name,created_at,updated_at,last_login_time,last_login_ip,status');
 
         if (!empty($search)) {
             $db = $db->where('user_name', 'like', "%$search%");
+        }
+        if (!empty($role)) {
+            $db = $db->where('a.role', '=', $role);
+        }
+
+        $admId = $this->getAdminId();
+        if ($admId != config('admin.id')) {
+            $find = db('admin')->where('pid', $admId)->field('id')->select();
+            $ids = array();
+            foreach ($find as $item) {
+                array_push($ids, $item['id']);
+            }
+            array_push($ids, $admId);
+            $db = $db->whereIn('a.id', $ids);
         }
 
         $result = $db->paginate($limits, false, ['page'  => $page]);
