@@ -24,6 +24,7 @@ class Params extends Base
 
     public function update($id, $value)
     {
+        $value = stripslashes($value);
         $result = db('sys_params')->where('id', $id)->update(['value' => $value]);
         if ($result) {
             return success();
