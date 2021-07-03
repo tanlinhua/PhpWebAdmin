@@ -30,6 +30,8 @@
 
 > [composer require predis/predis](http://packagist.p2hp.com/packages/predis/predis)
 
+> [composer require zoujingli/ip2region](https://github.com/zoujingli/ip2region)
+
 # [Swoole框架](https://www.swoole.com/)
 
 > [easyswoole](https://www.easyswoole.com/)
