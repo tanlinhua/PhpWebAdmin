@@ -36,6 +36,15 @@ return array (
     'primary' => false,
     'autoinc' => false,
   ),
+  'pid' => 
+  array (
+    'name' => 'pid',
+    'type' => 'int(11)',
+    'notnull' => false,
+    'default' => '0',
+    'primary' => false,
+    'autoinc' => false,
+  ),
   'status' => 
   array (
     'name' => 'status',
