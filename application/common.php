@@ -41,6 +41,35 @@ function error($msg = 'fail', $code = -1)
 }
 
 /**
+ * 判断空
+ */
+function is_empty($var)
+{
+    if (is_null($var)) {
+        return true;
+    } else if (is_string($var)) {
+        return '' === trim($var) ? true : false;
+    } else if (is_array($var)) {
+        return empty($var);
+    } else if (is_object($var)) {
+        try {
+            if (method_exists($var, 'isEmpty')) { // isEmpty
+                return $var->isEmpty();
+            } else if (method_exists($var, 'toArray')) { // toArray
+                return empty($var->toArray());
+            } else { // Conversion to Array
+                return 0 === count((array) $var);
+            }
+        } catch (\Exception $e) { // PHP 5.x
+            return false;
+        } catch (\Throwable $e) { // PHP 7.x
+            return false;
+        }
+    }
+    return false;
+}
+
+/**
  * 获取IP
  *
  * @return string
