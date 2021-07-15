@@ -32,6 +32,8 @@
 
 > [composer require zoujingli/ip2region](https://github.com/zoujingli/ip2region)
 
+> [composer require doctrine/annotations](https://hyperf.wiki/2.1/#/zh-cn/annotation)
+
 # [Swoole框架](https://www.swoole.com/)
 
 > [easyswoole](https://www.easyswoole.com/)
