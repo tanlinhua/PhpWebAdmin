@@ -9,6 +9,7 @@ class Index extends Controller
 {
     public function index()
     {
+        return '404';
         $this->redirect('/app', 302);
     }
 

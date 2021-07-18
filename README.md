@@ -34,6 +34,8 @@
 
 > [composer require doctrine/annotations](https://hyperf.wiki/2.1/#/zh-cn/annotation)
 
+> [composer require nesbot/carbon](https://www.cnblogs.com/qinsilandiao/p/10871551.html)
+
 # [Swoole框架](https://www.swoole.com/)
 
 > [easyswoole](https://www.easyswoole.com/)
