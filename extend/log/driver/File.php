@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace common\log\driver;
+namespace log\driver;
 
 use think\log\driver\File as FileDriver;
 
