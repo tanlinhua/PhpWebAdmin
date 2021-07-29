@@ -2,8 +2,8 @@
 
 namespace app\api\controller;
 
+use app\common\library\Token;
 use Exception;
-use Firebase\JWT\JWT;
 use think\Controller;
 use think\Request;
 
@@ -32,8 +32,7 @@ class Base extends Controller
         }
 
         try {
-            $info = JWT::decode($token, config('jwt.key'), ['HS256']);
-            $this->user_id = $info->data;
+            $this->user_id = Token::decode($token);
 
             $find = db('user')->where('id', $this->user_id)->field('status')->find();
             if ($find) {

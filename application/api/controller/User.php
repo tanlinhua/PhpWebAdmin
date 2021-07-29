@@ -2,6 +2,7 @@
 
 namespace app\api\controller;
 
+use app\common\library\Token;
 use think\Cache;
 use think\Validate;
 
@@ -99,7 +100,7 @@ class User
         $update['last_login_ip'] = get_client_ip();
         db('user')->where('phone', $phone)->update($update);
 
-        return success(lang('login success'), make_jwt($query['id']));
+        return success(lang('login success'), 0, Token::make_jwt($query['id']));
     }
 
     /**
