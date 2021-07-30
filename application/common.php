@@ -317,66 +317,68 @@ if (!function_exists('redis_list_clean')) {
 
 if (!function_exists('do_curl')) {
     /**
-     * 发送网络请求
+     * CURL发送网络请求
      *
-     * @param  string  $url
-     * @param  string  or array $params
-     * @param  string  $method
-     * @param  string  $head
-     * @param  boolean $https
-     * @return array
+     * @param  string       $url
+     * @param  string|array $params json string | array
+     * @param  string       $method GET|POST
+     * @param  string       $type   FORM|JSON
+     * @param  boolean      $https  true or false
+     * @param  array        $header $header=array('x-api-key:1', 'b:2');
+     * @return array        $response
      */
-    function do_curl($url, $params, $method = 'POST', $head = "FORM", $https = true)
+    function do_curl($url, $params, $method = 'POST', $type = "FORM", $https = true, $header = [])
     {
-        $query_string = is_array($params) ? http_build_query($params) : $params;
+        $response     = array();
         $curl         = curl_init();
+        $query_string = is_array($params) ? http_build_query($params) : $params;
 
-        if ($head == 'FORM') {
-            $headers = array('Content-Type:application/x-www-form-urlencoded');
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        } else if ($head == 'JSON') {
-            $headers = array("Content-Type:application/json;charset=UTF-8");
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        // 设置 http head
+        if ($type == 'FORM') {
+            $tmp = array('Content-Type:application/x-www-form-urlencoded;charset=UTF-8');
+        } else if ($type == 'JSON') {
+            $tmp = array("Content-Type:application/json;charset=UTF-8");
         }
-
+        $headers = array_merge($tmp, $header);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        // 设置 http method
         if ('GET' == $method) {
             $geturl = $query_string ? $url . (stripos($url, "?") !== false ? "&" : "?") . $query_string : $url;
             curl_setopt($curl, CURLOPT_URL, $geturl);
         } else {
-
             if ($method == 'POST') {
                 curl_setopt($curl, CURLOPT_POST, 1);
             } else {
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
             }
-
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $query_string);
         }
-
+        // 设置 https
         if ($https) {
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0); // 对认证证书来源的检查
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0); // 从证书中检查SSL加密算法是否存在
         }
-
+        // 其他配置
         curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']); // 模拟用户使用的浏览器
         curl_setopt($curl, CURLOPT_AUTOREFERER, 1);                         // 自动设置Referer
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);                            // 设置超时限制防止死循环
         curl_setopt($curl, CURLOPT_HEADER, 0);                              // 显示返回的Header区域内容
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);                      // 获取的信息以文件流的形式返回
-
-        $ret = curl_exec($curl);
+        // 执行请求
+        $data = curl_exec($curl);
+        // 处理响应
         $err = curl_error($curl);
-
-        if (false === $ret || !empty($err)) {
+        if (false === $data || !empty($err)) {
             $errno = curl_errno($curl);
-            curl_close($curl);
-            trace('do_curl.err=' . $err, 'error');
-            return ['ret' => false, 'msg' => $errno . ':' . $err];
+            trace("do_curl.url=$url,errno=$errno,err=$err", "error");
+            $response['ret'] = false;
+            $response['msg'] = $errno . ':' . $err;
         }
-
         curl_close($curl);
-        return ['ret' => true, 'data' => $ret];
+        $response['ret'] = true;
+        $response['data'] = $data;
+        return $response;
     }
 }
 
