@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\qiniu;
+namespace lib\qiniu;
 
 use Qiniu\Auth;
 use Qiniu\Config;
