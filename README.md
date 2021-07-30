@@ -36,6 +36,8 @@
 
 > [composer require nesbot/carbon](https://www.cnblogs.com/qinsilandiao/p/10871551.html)
 
+> [composer require hightman/httpclient](https://github.com/hightman/httpclient)
+
 # [Swoole框架](https://www.swoole.com/)
 
 > [easyswoole](https://www.easyswoole.com/)
