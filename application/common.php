@@ -493,3 +493,21 @@ if (!function_exists('xss_clean')) {
         return \app\common\library\Security::instance()->xss_clean($content, $is_image);
     }
 }
+
+if (!function_exists('http_host')) {
+    /**
+     * 获取当前域名,包含端口
+     *
+     * @return string
+     */
+    function http_host()
+    {
+        $http_type = (
+            (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
+            || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+            || ($_SERVER['SERVER_PORT'] == 443)) ? 'https://' : 'http://';
+
+        $host = $http_type . $_SERVER['HTTP_HOST'];
+        return $host;
+    }
+}
