@@ -107,7 +107,7 @@ class Login extends Controller
         $data["last_login_time"] = date("Y-m-d H:i:s", time());
         $data["last_login_ip"] = get_client_ip();
         db("admin")->where("id", $admin["id"])->update($data);
-        return success('登陆成功');
+        return success('登录成功');
     }
 
     /*
@@ -118,6 +118,6 @@ class Login extends Controller
         session("admin_loginTime", null);
         session("admin_id", null);
         session("admin_username", null);
-        $this->redirect("/admin/login");
+        $this->success("退出成功", "/admin/login");
     }
 }
