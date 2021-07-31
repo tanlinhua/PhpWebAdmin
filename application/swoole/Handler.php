@@ -4,7 +4,7 @@ namespace app\swoole;
 
 // 调用👇
 // $taskData = array('id' => $taskId, 'platform' => $platform, 'phone' => $phone, 'content' => $tmpContent, 'pkinfo' => $smsKeyInfo);
-// $lenght = Handler::doAsyncTask(json_encode($taskData));
+// $lenght = Handler::add(json_encode($taskData));
 
 // swoole服务备忘录👇
 // https://wiki.swoole.com/wiki/page/699.html
@@ -21,7 +21,7 @@ class Handler
      * @param string $data json数据
      * @return void
      */
-    public static function doAsyncTask($data)
+    public static function add($data)
     {
         if (empty($data)) {
             trace("app\swoole\Handler.data is empty", 'notice');
