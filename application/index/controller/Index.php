@@ -2,7 +2,7 @@
 
 namespace app\index\controller;
 
-use app\queue\controller\Queuetest;
+use app\queue\Handler;
 use think\Controller;
 
 class Index extends Controller
@@ -23,14 +23,16 @@ class Index extends Controller
         return error("您请求的资源不存在", 404);
     }
 
-    public function hello()
+    /**
+     * 便于各种临时测试
+     */
+    public function test()
     {
-        $id = input('get.id');
-        if (1 == $id) {
-            $q = new Queuetest();
-            $ret = $q->index();
+        $t = input('get.t');
+        if (1 == $t) {
+            $ret = Handler::add();
             halt($ret);
         }
-        return 'index.index.hello';
+        return 'index.Index.test';
     }
 }
