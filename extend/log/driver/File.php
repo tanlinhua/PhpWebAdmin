@@ -1,20 +1,11 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
 
 namespace log\driver;
 
 use think\log\driver\File as FileDriver;
 
 /**
- * 本地化调试输出到文件
+ * runtime/log 按 Ymd 记录
  */
 class File extends FileDriver
 {
