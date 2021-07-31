@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\fcm;
+namespace fcm;
 
 class Push1
 {

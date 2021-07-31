@@ -2,8 +2,8 @@
 
 namespace app\cron\controller;
 
-use app\common\fcm\Push1;
-use app\common\fcm\Push2;
+use fcm\Push1;
+use fcm\Push2;
 
 /**
  * Fcm.Push
