@@ -1,10 +1,10 @@
 <?php
 
-namespace app\queue\controller;
+namespace app\queue\jobs;
 
 use think\Queue\Job;
 
-class Queuejob
+class Jobs1
 {
     /**
      * fire方法是消息队列默认调用的方法

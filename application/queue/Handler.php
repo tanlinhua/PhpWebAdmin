@@ -1,26 +1,27 @@
 <?php
 
-namespace app\queue\controller;
+namespace app\queue;
 
-use think\Controller;
 use think\Queue;
 
-class Queuetest extends Controller
+/**
+ * 监听任务并执行
+ * php think queue:listen
+ * php think queue:work --daemon（不加--daemon为执行单个任务）
+ * 两种，具体的可选参数可以输入命令加 --help 查看
+ * 可配合supervisor使用，保证进程常驻
+ * Test -> nohup php think queue:listen --queue MyJobs &
+ */
+class Handler
 {
-    public function test()
-    {
-        return 'queue.test';
-    }
-
     /**
      * 发送队列消息
-     * nohup php think queue:listen --queue MyJobs &
      */
-    public function index()
+    public static function add($data = [])
     {
         // 1.当前任务将由哪个类来负责处理。
         //   当轮到该任务时，系统将生成一个该类的实例，并调用其 fire 方法
-        $jobHandlerClassName  = 'app\queue\controller\Queuejob';
+        $jobHandlerClassName  = 'app\queue\jobs\Jobs1';
 
         // 2.当前任务归属的队列名称，如果为新队列，会自动创建
         $jobQueueName  = "MyJobs";
