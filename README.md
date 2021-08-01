@@ -58,6 +58,8 @@
 
 > **日志插件** [composer require monolog/monolog](https://www.cnblogs.com/jiqing9006/p/9233417.html)
 
+> **TG SDK** [composer require longman/telegram-bot](https://github.com/php-telegram-bot/core)
+
 # [Swoole框架](https://www.swoole.com/)
 
 > [easyswoole](https://www.easyswoole.com/)
