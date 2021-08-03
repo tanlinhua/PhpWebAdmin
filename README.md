@@ -56,6 +56,8 @@
 
 > **kafka客户端** [composer require nmred/kafka-php](https://github.com/weiboad/kafka-php)
 
+> **NSQ** [composer require nsq/nsq](https://github.com/nsqphp/nsqphp)
+
 > **日志插件** [composer require monolog/monolog](https://www.cnblogs.com/jiqing9006/p/9233417.html)
 
 > **TG SDK** [composer require longman/telegram-bot](https://github.com/php-telegram-bot/core)
