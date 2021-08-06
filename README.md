@@ -62,6 +62,16 @@
 
 > **TG SDK** [composer require longman/telegram-bot](https://github.com/php-telegram-bot/core)
 
+> **PHP测试框架**[composer require --dev phpunit/phpunit](http://www.phpunit.cn/)
+
+# [PHP](https://www.runoob.com/php/php-tutorial.html)
+
+> [Array 函数](https://www.runoob.com/php/php-ref-array.html)
+
+> [Date/Time 函数](https://www.runoob.com/php/php-ref-date.html)
+
+> [String 函数](https://www.runoob.com/php/php-ref-string.html)
+
 # [Swoole框架](https://www.swoole.com/)
 
 > [easyswoole](https://www.easyswoole.com/)
