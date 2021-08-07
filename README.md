@@ -56,6 +56,8 @@
 
 > **kafka客户端** [composer require nmred/kafka-php](https://github.com/weiboad/kafka-php)
 
+> **kafka客户端.swoole**[composer require longlang/phpkafka](https://github.com/swoole/phpkafka)
+
 > **NSQ** [composer require nsq/nsq](https://github.com/nsqphp/nsqphp)
 
 > **日志插件** [composer require monolog/monolog](https://www.cnblogs.com/jiqing9006/p/9233417.html)
