@@ -56,7 +56,7 @@
 
 > **kafka客户端** [composer require nmred/kafka-php](https://github.com/weiboad/kafka-php)
 
-> **kafka客户端.swoole**[composer require longlang/phpkafka](https://github.com/swoole/phpkafka)
+> **kafka客户端.swoole** [composer require longlang/phpkafka](https://github.com/swoole/phpkafka)
 
 > **NSQ** [composer require nsq/nsq](https://github.com/nsqphp/nsqphp)
 
