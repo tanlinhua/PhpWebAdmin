@@ -121,7 +121,7 @@ https://segmentfault.com/a/1190000007250604
 
 # [Swoole框架](https://www.swoole.com/)
 
-> [easyswoole](https://www.easyswoole.com/)
+> [imi](https://www.imiphp.com/)
 > [Hyperf](https://www.hyperf.io/)
 
 # [命令行](https://www.kancloud.cn/manual/thinkphp5/122951)
