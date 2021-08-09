@@ -2,7 +2,8 @@
 
 namespace app\index\controller;
 
-use app\queue\Handler;
+use app\queue\Handler as QueueHandler;
+use app\swoole\Handler as SwooleHandler;
 use think\Controller;
 
 class Index extends Controller
@@ -30,8 +31,14 @@ class Index extends Controller
     {
         $t = input('get.t');
         if (1 == $t) {
-            $ret = Handler::add();
+            echo "queue<br>";
+            $ret = QueueHandler::add();
             halt($ret);
+        } else if (2 == $t) {
+            echo "swoole<br>";
+            $taskData = array('id' => 1, 'platform' => 'test', 'phone' => "138", 'content' => "test", 'pkinfo' => '{"k":"v"}');
+            $lenght = SwooleHandler::add(json_encode($taskData));
+            halt($lenght);
         }
         return 'index.Index.test';
     }

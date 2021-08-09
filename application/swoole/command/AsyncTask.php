@@ -31,9 +31,9 @@ class AsyncTask extends Command
         $serv = new \Swoole\Server('0.0.0.0', 9501);
 
         $cpuNum = swoole_cpu_num();
-        $this->task_worker_num = $cpuNum * 100;
-        $output->writeln('cpu:' . $cpuNum);
-        $output->writeln('task_worker_num:' . $this->task_worker_num);
+        $this->task_worker_num = $cpuNum * 20; // Linux默认配置超过1024会报too many open files
+
+        $output->writeln("cpuNum=$cpuNum,taskNum=$this->task_worker_num");
 
         $serv->set(array('task_worker_num' => $this->task_worker_num));
 
