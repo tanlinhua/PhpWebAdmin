@@ -64,7 +64,10 @@
 
 > **TG SDK** [composer require longman/telegram-bot](https://github.com/php-telegram-bot/core)
 
-> **PHP测试框架**[composer require --dev phpunit/phpunit](http://www.phpunit.cn/)
+> **PHP测试框架** [composer require --dev phpunit/phpunit](http://www.phpunit.cn/)
+
+> **HashIds** [composer require hashids/hashids](http://packagist.p2hp.com/packages/hashids/hashids)
+
 
 # [PHP](https://www.runoob.com/php/php-tutorial.html)
 
