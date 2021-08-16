@@ -243,78 +243,6 @@ if (!function_exists('decrypt_string')) {
     }
 }
 
-if (!function_exists('redis_list_rpush')) {
-    /**
-     * 在队列尾部插入一个元素
-     * 
-     * @param string $taskId
-     * @param array $datas
-     * @return int $length (队列长度)
-     */
-    function redis_list_rpush($taskId, $datas)
-    {
-        $redis = Cache::store('redis')->handler();
-        $key    = "Task" . $taskId;
-        foreach ($datas as $phone) {
-            $length = $redis->rPush($key, $phone);
-        }
-        trace("新增RedisList:$key,length=$length", 'notice');
-        return $length;
-    }
-}
-
-if (!function_exists('redis_list_lpop')) {
-    /**
-     * 删除并返回队列中的头元素
-     * 
-     * @param string $taskId
-     * @return string
-     */
-    function redis_list_lpop($taskId)
-    {
-        $redis      = Cache::store('redis')->handler();
-        $redisKey   = "Task" . $taskId;
-        $value      = $redis->lPop($redisKey);
-        return $value;
-    }
-}
-
-if (!function_exists('redis_list_llen')) {
-    /**
-     * 获取列表长度
-     *
-     * @param string $taskId
-     * @return int $length
-     */
-    function redis_list_llen($taskId)
-    {
-        $redis      = Cache::store('redis')->handler();
-        $redisKey   = "Task" . $taskId;
-        $length     = $redis->lLen($redisKey);
-        return $length;
-    }
-}
-
-if (!function_exists('redis_list_clean')) {
-    /**
-     * 清空list
-     * 
-     * @param string $taskId
-     * @return void
-     */
-    function redis_list_clean($taskId)
-    {
-        $redis  = Cache::store('redis')->handler();
-        $key    = "Task" . $taskId;
-        $result = $redis->lTrim($key, 1, 0);
-        if ($result) {
-            trace("删除RedisList:$key 成功", 'notice');
-        } else {
-            trace("删除RedisList:$key 失败", 'notice');
-        }
-    }
-}
-
 if (!function_exists('do_curl')) {
     /**
      * CURL发送网络请求
@@ -509,5 +437,21 @@ if (!function_exists('http_host')) {
 
         $host = $http_type . $_SERVER['HTTP_HOST'];
         return $host;
+    }
+}
+
+if (!function_exists('http_host')) {
+    /**
+     * 生成uuid
+     */
+    function uuid()
+    {
+        $chars = md5(uniqid(mt_rand(), true));
+        $uuid = substr($chars, 0, 8) . '-'
+            . substr($chars, 8, 4) . '-'
+            . substr($chars, 12, 4) . '-'
+            . substr($chars, 16, 4) . '-'
+            . substr($chars, 20, 12);
+        return $uuid;
     }
 }

@@ -195,10 +195,11 @@ return [
         ],
         // redis缓存
         'redis'   =>  [
-            'type'      => 'redis',
-            'host'      => '127.0.0.1',
-            'port'      => 6379,
-            'password'  => '',
+            'type'     => 'redis',
+            'host'     => '127.0.0.1',
+            'port'     => 6379,
+            'password' => '',
+            'expire'   => 0,
         ],
     ],
 
