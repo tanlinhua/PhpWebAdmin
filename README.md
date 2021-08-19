@@ -77,51 +77,6 @@
 
 > [String 函数](https://www.runoob.com/php/php-ref-string.html)
 
-# PHP魔术
-```php
-一、魔术常量
-概念：所谓的魔术常量就是PHP预定义的一些常量，这些常量会随着所在的位置而变化。
-1、__LINE__  获取文件中的当前行号。
-2、__FILE__  获取文件的完整路径和文件名。
-3、__DIR__   获取文件所在目录。
-4、__FUNCTION__  获取函数名称（PHP 4.3.0 新加）。
-5、__CLASS__    获取类的名称（PHP 4.3.0 新加）。
-6、__METHOD__  获取类的方法名（PHP 5.0.0 新加）。
-7、__NAMESPACE__ 当前命名空间的名称（区分大小写）。
-8、__TRAIT__  Trait 的名字（PHP 5.4.0 新加）。
-
-二、超全局变量（9个）
-1、$GLOBALS  ：储存全局作用域中的变量
-2、$_SERVER  ：获取服务器相关信息
-3、$_REQUEST ：获取POST和GET请求的参数
-4、$_POST ： 获取表单的POST请求参数
-5、$_GET： 获取表单的GET请求参数
-6、$_FILES ：获取上传文件的的变量
-7、$_ENV ： 获取服务器端环境变量的数组
-8、$_COOKIE：获取浏览器的cookie
-9、$_SESSION ： 获取session
-
-三、魔术方法
-__construct()，类的构造函数
-__destruct()，类的析构函数
-__call()，在对象中调用一个不可访问方法时调用
-__callStatic()，用静态方式中调用一个不可访问方法时调用
-__get()，获得一个类的成员变量时调用
-__set()，设置一个类的成员变量时调用
-__isset()，当对不可访问属性调用isset()或empty()时调用
-__unset()，当对不可访问属性调用unset()时被调用。
-__sleep()，执行serialize()时，先会调用这个函数
-__wakeup()，执行unserialize()时，先会调用这个函数
-__toString()，类被当成字符串时的回应方法
-__invoke()，调用函数的方式调用一个对象时的回应方法
-__set_state()，调用var_export()导出类时，此静态方法会被调用。
-__clone()，当对象复制完成时调用
-__autoload()，尝试加载未定义的类
-__debugInfo()，打印所需调试信息
-
-https://segmentfault.com/a/1190000007250604
-```
-
 # [Swoole框架](https://www.swoole.com/)
 
 > [imi](https://www.imiphp.com/)
