@@ -163,6 +163,11 @@ class Redis
         return $result;
     }
 
+    public function hSet($key, $hashKey, $value)
+    {
+        return $this->_redis->hSet($key, $hashKey, $value);
+    }
+
     /**
      * 获取hash表的数据
      * @param string    $hash   哈希表名
