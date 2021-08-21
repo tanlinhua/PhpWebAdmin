@@ -154,7 +154,7 @@ class Redis
      * @param array     $data  要写入的数据 array('key'=>'value')
      * @return bool
      */
-    public function hashSet($hash, $data)
+    public function hashSetArray($hash, $data)
     {
         $result = false;
         if (is_array($data) && !empty($data)) {
@@ -163,7 +163,15 @@ class Redis
         return $result;
     }
 
-    public function hSet($key, $hashKey, $value)
+    /**
+     * 设置hash表key&value
+     *
+     * @param string $key       哈希表名
+     * @param string $hashKey   哈希key
+     * @param string $value     哈希value
+     * @return int|bool
+     */
+    public function hashSet($key, $hashKey, $value)
     {
         return $this->_redis->hSet($key, $hashKey, $value);
     }
@@ -316,7 +324,7 @@ class Redis
      * 
      * @param string    $setName    集合名
      * @param mixed     $value      值
-     * @param int       $score      元素排序值
+     * @param string    $score      元素排序值
      */
     public function setAdd($setName, $value = null, $score = null)
     {
