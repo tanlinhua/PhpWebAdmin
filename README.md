@@ -68,14 +68,9 @@
 
 > **HashIds** [composer require hashids/hashids](http://packagist.p2hp.com/packages/hashids/hashids)
 
+> **AWS** [composer require aws/aws-sdk-php](https://docs.aws.amazon.com/zh_cn/sdk-for-php/index.html)
 
-# [PHP](https://www.runoob.com/php/php-tutorial.html)
-
-> [Array 函数](https://www.runoob.com/php/php-ref-array.html)
-
-> [Date/Time 函数](https://www.runoob.com/php/php-ref-date.html)
-
-> [String 函数](https://www.runoob.com/php/php-ref-string.html)
+# [PHP常用内置函数](docs/一些笔记/PHP常用内置函数.md)
 
 # [Swoole框架](https://www.swoole.com/)
 
