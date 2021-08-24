@@ -1,6 +1,6 @@
 <?php
 
-namespace notify;
+namespace lib\telegram;
 
 class Telegram
 {
