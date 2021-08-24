@@ -2,8 +2,6 @@
 
 // 应用公共文件
 
-use think\Cache;
-
 if (!function_exists('success')) {
     /**
      * 响应成功的json数据
@@ -31,6 +29,42 @@ if (!function_exists('error')) {
     {
         $data = array('code' => $code, 'msg' => $msg, 'count' => 0, 'data' => null);
         return json($data);
+    }
+}
+
+if (!function_exists('encrypt_string')) {
+    /**
+     * 加密方法:aes-128-cbc转base64字符串
+     * aes-128-cbc.key = md5(key)前16位
+     * aes-128-cbc.iv = md5(iv)前16位
+     * 
+     * @param string $str   原始字符串
+     * @param string $key   字符串KEY
+     * @param string $iv    字符串IV
+     * @return string
+     */
+    function encrypt_string($str, $key = "ak47", $iv = "m416")
+    {
+        $base = base64_encode(openssl_encrypt($str, 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16)));
+        return $base;
+    }
+}
+
+if (!function_exists('decrypt_string')) {
+    /**
+     * 解密:base64字符串解密后aes-128-cbc解密
+     * aes-128-cbc.key = md5(key)前16位
+     * aes-128-cbc.iv = md5(iv)前16位
+     * 
+     * @param string $encryptedText 加密字符串
+     * @param string $key   字符串KEY
+     * @param string $iv    字符串IV
+     * @return String
+     */
+    function decrypt_string($encryptedText,  $key = "ak47", $iv = "m416")
+    {
+        $str = openssl_decrypt(base64_decode($encryptedText), 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16));
+        return $str;
     }
 }
 
@@ -208,38 +242,6 @@ if (!function_exists('csv_output')) {
         header('Expires:0');
         header('Pragma:public');
         echo $data;
-    }
-}
-
-if (!function_exists('encrypt_string')) {
-    /**
-     * 加密
-     * 
-     * @param string $str 原始字符串
-     * @param string md5($key)
-     * @param string md5($iv)
-     * @return string
-     */
-    function encrypt_string($str, $key = "ak47", $iv = "m416")
-    {
-        $base = base64_encode(openssl_encrypt($str, 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16)));
-        return $base;
-    }
-}
-
-if (!function_exists('decrypt_string')) {
-    /**
-     * 解密
-     * 
-     * @param string $encryptedText 加密字符串
-     * @param string md5($key)
-     * @param string md5($iv)
-     * @return String
-     */
-    function decrypt_string($encryptedText,  $key = "ak47", $iv = "m416")
-    {
-        $str = openssl_decrypt(base64_decode($encryptedText), 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16));
-        return $str;
     }
 }
 
