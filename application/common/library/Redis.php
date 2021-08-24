@@ -281,7 +281,7 @@ class Redis
      * @param   int     $timeout    超时时间
      * @return  string  $value
      */
-    public function listGet($name, $wait = false, $timeout = 60)
+    public function listGetAndDel($name, $wait = false, $timeout = 60)
     {
         if ($wait) {
             $value = $this->_redis->BLPop($name, $timeout); //反之 BRPop
@@ -289,6 +289,21 @@ class Redis
             $value = $this->_redis->lPop($name); //反之 rPop
         }
         return $value;
+    }
+
+    /**
+     * 返回列表中指定区间内的元素,默认返回全部
+     * 区间以偏移量 START 和 END 指定。 其中 0 表示列表的第一个元素， 1 表示列表的第二个元素，以此类推。 
+     * 也可以使用负数下标，以 -1 表示列表的最后一个元素， -2 表示列表的倒数第二个元素，以此类推。
+     *
+     * @param string $name
+     * @param integer $start
+     * @param integer $end
+     * @return array
+     */
+    public function listGet($name, $start = 0, $end = -1)
+    {
+        return $this->_redis->lRange($name, $start, $end);
     }
 
     /**
