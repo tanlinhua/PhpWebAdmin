@@ -303,6 +303,22 @@ class Redis
     }
 
     /**
+     * 移除列表中与参数 $value 相等的元素
+     *
+     * @param string $name
+     * @param string $value
+     * @param integer $count 👇
+     * $count > 0 : 从表头开始向表尾搜索，移除与 VALUE 相等的元素，数量为 COUNT 。
+     * $count < 0 : 从表尾开始向表头搜索，移除与 VALUE 相等的元素，数量为 COUNT 的绝对值。
+     * $count = 0 : 移除表中所有与 VALUE 相等的值。
+     * @return int|bool
+     */
+    public function listDel($name, $value, $count = 0)
+    {
+        return $this->_redis->lRem($name, $value, $count);
+    }
+
+    /**
      * 清空队列
      *
      * @param   string $name    队列名称
