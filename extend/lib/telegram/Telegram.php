@@ -23,8 +23,9 @@ class Telegram
         $params['text']    = $message;
 
         $result = do_curl($url, $params, 'GET');
-        if ($result["ret"] != true) {
+        if ($result["result"] != true) {
             trace($result['msg'], 'error');
+            return;
         }
         $data = json_decode($result['data'], true);
         if ($data['ok'] != true) {

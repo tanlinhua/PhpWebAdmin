@@ -257,7 +257,7 @@ if (!function_exists('do_curl')) {
      */
     function do_curl($url, $params, $method = 'POST', $type = "FORM", $https = true, $header = [])
     {
-        $response     = array();
+        $response     = array("result" => true, "msg" => "ok", "data" => null);
         $curl         = curl_init();
         $query_string = is_array($params) ? http_build_query($params) : $params;
 
@@ -300,11 +300,10 @@ if (!function_exists('do_curl')) {
         if (false === $data || !empty($err)) {
             $errno = curl_errno($curl);
             trace("do_curl.url=$url,errno=$errno,err=$err", "error");
-            $response['ret'] = false;
+            $response['result'] = false;
             $response['msg'] = $errno . ':' . $err;
         }
         curl_close($curl);
-        $response['ret'] = true;
         $response['data'] = $data;
         return $response;
     }
