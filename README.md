@@ -70,6 +70,8 @@
 
 > **AWS** [composer require aws/aws-sdk-php](https://docs.aws.amazon.com/zh_cn/sdk-for-php/index.html)
 
+> **APNs** [composer require duccio/apns-php](https://github.com/immobiliare/ApnsPHP)
+
 # [PHP常用内置函数](docs/一些笔记/PHP常用内置函数.md)
 
 # [Swoole框架](https://www.swoole.com/)
