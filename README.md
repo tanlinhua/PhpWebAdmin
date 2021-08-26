@@ -70,6 +70,13 @@
 
 > **AWS** [composer require aws/aws-sdk-php](https://docs.aws.amazon.com/zh_cn/sdk-for-php/index.html)
 
+> **权限管理** 
+```
+php-casbin: https://github.com/php-casbin/php-casbin
+TP6权限: https://github.com/php-casbin/think-authz
+adapter: https://github.com/php-casbin/database-adapter
+```
+
 > **APNs** [composer require duccio/apns-php](https://github.com/immobiliare/ApnsPHP)
 
 # [PHP常用内置函数](docs/一些笔记/PHP常用内置函数.md)
