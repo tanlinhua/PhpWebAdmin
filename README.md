@@ -108,6 +108,11 @@ echo debug('begin','end','m');      // 内存占用情况 (0.838KB)
 ```
 
 # 漏洞
+
+### WEB安全
+- [Web安全学习笔记](https://github.com/LyleMi/Learn-Web-Hacking)
+- [在线阅读](https://websec.readthedocs.io/zh/latest/)
+
 ### 修复记录
 ```php
 thinkphp\library\think\process\pipes\Windows.php
