@@ -112,6 +112,7 @@ echo debug('begin','end','m');      // 内存占用情况 (0.838KB)
 ### WEB安全
 - [Web安全学习笔记](https://github.com/LyleMi/Learn-Web-Hacking)
 - [在线阅读](https://websec.readthedocs.io/zh/latest/)
+- [开发中参考](https://www.kancloud.cn/manual/thinkphp5/268462)
 
 ### 修复记录
 ```php
