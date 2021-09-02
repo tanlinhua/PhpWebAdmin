@@ -85,10 +85,12 @@ class Admin extends Base
             return error($vResult);
         }
 
-        $page   = trim(input('page'));      //分页
-        $limits = trim(input('limit'));     //分页数量
-        $search = trim(input("search"));    //检索
-        $role   = trim(input("role"));      //角色
+        $page   = trim(input('page'));    //分页
+        $limits = trim(input('limit'));   //分页数量
+        $search = trim(input("search"));  //检索
+        $role   = trim(input("role"));    //角色
+        $t1     = trim(input("t1"));      //开始时间
+        $t2     = trim(input("t2"));      //结束时间
 
         $db = db('admin')->alias('a')->join('role r', 'a.role=r.id', 'left')
             ->where('a.role', 'NEQ', 0)->order('a.id asc')
@@ -99,6 +101,9 @@ class Admin extends Base
         }
         if (!empty($role)) {
             $db = $db->where('a.role', '=', $role);
+        }
+        if (!empty($t1) && !empty($t2)) {
+            $db = $db->whereBetween('last_login_time', [$t1, $t2]);
         }
 
         $admId = $this->getAdminId();

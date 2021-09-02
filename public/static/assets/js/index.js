@@ -29,7 +29,7 @@
     })();
 
     layui.config({
-        base: '/static/assets/lay/modules/'
+        // base: '../view/static/layui/lay/modules/'
     }).extend(app).use(entry || 'home');
 
 })();
