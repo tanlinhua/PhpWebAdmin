@@ -16,7 +16,7 @@ class Role extends Base
 
     public function index()
     {
-        return view();
+        return view('rbac/role');
     }
 
     public function add()

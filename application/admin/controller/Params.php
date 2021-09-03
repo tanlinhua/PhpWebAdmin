@@ -9,7 +9,7 @@ class Params extends Base
 {
     public function index()
     {
-        return view();
+        return view('system/params');
     }
 
     public function add()

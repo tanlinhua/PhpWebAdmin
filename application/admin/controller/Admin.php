@@ -21,7 +21,7 @@ class Admin extends Base
     // view
     public function index()
     {
-        return view('adm/index');
+        return view('rbac/user');
     }
 
     // 增
@@ -116,6 +116,8 @@ class Admin extends Base
             array_push($ids, $admId);
             $db = $db->whereIn('a.id', $ids);
         }
+
+        $limits = empty($limits) ? 100 : $limits; // 临时解决一下上级id下拉框赋值
 
         $result = $db->paginate($limits, false, ['page'  => $page]);
 

@@ -7,7 +7,7 @@ class Permission extends Base
     // view
     public function index()
     {
-        return view();
+        return view('rbac/permission');
     }
 
     // read
