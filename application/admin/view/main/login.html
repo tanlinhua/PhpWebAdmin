@@ -14,6 +14,7 @@
 <body class="login-wrap">
     <div class="login-container">
         <form class="login-form">
+            {:token()}
             <div class="input-group">
                 <input type="text" id="username" class="input-field" autocomplete="off">
                 <label for="username" class="input-label">
@@ -26,19 +27,22 @@
                     <span class="label-title">密码</span>
                 </label>
             </div>
-            <div class="input-group" style="display: flex; padding-right: 0;">
-                {eq name="mVerifyType" value="1"}
-                <input type="text" id="code" class="input-field" style="flex:1" autocomplete="off">
-                <label for="code" class="input-label">
+            {eq name="google" value="true"}
+            <div class="input-group">
+                <input type="text" id="g_code" class="input-field" autocomplete="off">
+                <label for="g_code" class="input-label">
                     <span class="label-title">安全码</span>
                 </label>
-                {else/}
+            </div>
+            {else/}
+            <input type="text" id="g_code" value="0" hidden>
+            {/eq}
+            <div class="input-group" style="display: flex; padding-right: 0;">
                 <input type="text" id="code" class="input-field" style="flex:1" autocomplete="off">
                 <label for="code" class="input-label">
                     <span class="label-title">验证码</span>
                 </label>
                 <image src="{:captcha_src()}" onclick="this.src=this.src+'?'+Math.random()" id="captcha" style="width:145px;z-index:999;"></image>
-                {/eq}
             </div>
             <button type="button" id="btn_submit" onclick="login();return false;" class="login-button">登录<i class="ai ai-enter"></i></button>
         </form>
@@ -49,9 +53,7 @@
 <script src="/static/layui/js/jquery-3.3.1.min.js"></script>
 <script src="/static/layui/js/index.js" data-main="login"></script>
 <script>
-    layui.use('layer', function () {
-        var layer = layui.layer;
-    });
+    var layer = layui.layer;
 
     document.onkeydown = function (e) {
         if (!e) e = window.event;
@@ -61,10 +63,17 @@
     };
 
     function login() {
+        console.log($("[name='__token__']").val());
         $.ajax({
             url: '/admin/login/check',
             method: 'post',
-            data: { user_name: $('#username').val(), password: $('#password').val(), code: $('#code').val() },
+            data: {
+                user_name: $('#username').val(),
+                password: $('#password').val(),
+                code: $('#code').val(),
+                g_code: $('#g_code').val(),
+                __token__: $("[name='__token__']").val(),
+            },
             dataType: 'JSON',
             success: function (res) {
                 if (res.code === 0) {

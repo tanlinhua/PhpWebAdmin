@@ -265,9 +265,14 @@ return [
         'useArithmetic' => true,
     ],
 
-    //Admin
+    // 自定义系统配置
     'admin'                 => [
-        'id'       => 1,
+        // 超级管理员ID
+        'id'        => 1,
+        // 是否开启谷歌验证码
+        // PHP: composer require "phpgangsta/googleauthenticator:dev-master"
+        // iOS: AppStore搜索Google Authenticator / Android: GooglePlay搜索Google身份验证器或者其他安卓市场下载
+        'google'    => false,
     ],
 
     //JWT

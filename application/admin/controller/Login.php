@@ -4,17 +4,23 @@ namespace app\admin\controller;
 
 use PHPGangsta_GoogleAuthenticator;
 use think\Controller;
+use think\Request;
+use think\Validate;
 
 class Login extends Controller
 {
-    private $mVerifyType = 2; // 登录验证类型:(1:谷歌验证器/2:图形验证码)
+    private $google;
 
-    // PHP: composer require "phpgangsta/googleauthenticator:dev-master"
-    // iOS: AppStore搜索Authenticator / Android: GooglePlay搜索Google身份验证器或者其他安卓市场下载
+    public function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+        $this->google = config("admin.google");
+    }
+
     // 创建谷歌认证并记录密钥和二维码地址
     public function createGoogleAuth()
     {
-        if ($this->mVerifyType == 2) {
+        if (!$this->google) {
             return 'Not Supported';
         }
         $exist  = db('sys_params')->where('key', 'GoogleAuthenticator')->value('value');
@@ -22,11 +28,11 @@ class Login extends Controller
             return 'exist';
         }
 
-        $name       = "MyAdminAuth";
-        $ga         = new PHPGangsta_GoogleAuthenticator();
-        $secret     = $ga->createSecret(); //账号密钥
-        $qrCodeUrl  = $ga->getQRCodeGoogleUrl($name, $secret); //密钥二维码
-        $data       = array('secret' => $secret, 'qrCodeUrl' => $qrCodeUrl);
+        $name      = "MyAdminAuth";
+        $ga        = new PHPGangsta_GoogleAuthenticator();
+        $secret    = $ga->createSecret();                                    //账号密钥
+        $qrCodeUrl = $ga->getQRCodeGoogleUrl($name, $secret);                //密钥二维码
+        $data      = array('secret' => $secret, 'qrCodeUrl' => $qrCodeUrl);
 
         $result     = db('sys_params')->insert([
             'key' => 'GoogleAuthenticator',
@@ -47,9 +53,10 @@ class Login extends Controller
      */
     private function verifyGoogleAuth($code = '')
     {
-        $ga             = new PHPGangsta_GoogleAuthenticator();
-        $data           = json_decode(get_sys_params_value('GoogleAuthenticator'), true);
-        $checkResult    = $ga->verifyCode($data['secret'], $code, 2); // 2 = 2*30sec clock tolerance
+        $ga          = new PHPGangsta_GoogleAuthenticator();
+        $data        = json_decode(get_sys_params_value('GoogleAuthenticator'), true);
+        $checkResult = $ga->verifyCode($data['secret'], $code, 2); // 2 = 2*30sec clock tolerance
+
         if ($checkResult) {
             return true;
         }
@@ -63,7 +70,7 @@ class Login extends Controller
      */
     public function index()
     {
-        $this->assign('mVerifyType', $this->mVerifyType);
+        $this->assign('google', $this->google ? "true" : "false");
         return view('main/login');
     }
 
@@ -72,24 +79,39 @@ class Login extends Controller
      */
     public function check()
     {
-        $userName   = trim(input("user_name"));
-        $password   = trim(input("password"));
-        $code       = trim(input("code"));
+        $userName = trim(input("user_name"));
+        $password = trim(input("password"));
+        $code     = trim(input("code"));
+        $token    = trim(input("__token__"));
+        $g_code   = trim(input("g_code"));
 
-        if (empty($userName) || empty($password) || empty($code)) {
-            return error("输入不合法");
-        }
-
-        // 验证码
-        if ($this->mVerifyType == 1) {
-            if (!$this->verifyGoogleAuth($code)) {
-                return error('验证码错误!');
-            }
-        } else {
-            if (!captcha_check($code)) {
-                return error("验证码错误.");
+        if ($this->google == true) {
+            if (!$this->verifyGoogleAuth($g_code)) {
+                return error('安全码错误!');
             }
         }
+
+        $rules = [
+            'user_name|用户名' => 'require',
+            'password|密码'   => 'require',
+            'code|验证码'      => 'require|captcha',
+            '__token__|令牌'  => 'require|token',
+        ];
+        $datas = [
+            'user_name' => $userName,
+            'password'  => $password,
+            'code'      => $code,
+            '__token__' => $token,
+        ];
+
+        $validate = new Validate($rules);
+        $result = $validate->check($datas);
+        if (!$result) {
+            return error($validate->getError());
+        }
+        // if (!captcha_check($code)) {
+        //     return error("验证码错误.");
+        // }
 
         $admin = db("admin")->where("user_name", $userName)->find();
 
