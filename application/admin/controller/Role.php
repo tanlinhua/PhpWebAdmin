@@ -36,7 +36,7 @@ class Role extends Base
 
     public function del()
     {
-        $id = input('get.id');
+        $id = input('post.id');
 
         $result = $this->roleModel->destroy(['id' => $id]);
         if ($result > 0) {

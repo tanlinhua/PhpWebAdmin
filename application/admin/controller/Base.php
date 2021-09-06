@@ -81,4 +81,19 @@ class Base extends Controller
         $role_id = db('admin')->where('id', $this->getAdminId())->value('role');
         return $role_id;
     }
+
+    /**
+     * 获取查询参数
+     * @param array   $attach   附带参数字段
+     * @return array
+     */
+    protected function getParams($attach = array())
+    {
+        $params[]  = $this->request->get("page/d", 1);
+        $params[] = $this->request->get("limit/d", 999999);
+        foreach ($attach as $key) {
+            $params[] = $this->request->get($key);
+        }
+        return $params;
+    }
 }

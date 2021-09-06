@@ -11,7 +11,7 @@ class Index extends Controller
 {
     public function index()
     {
-        return '404';
+        return json(['code' => '404', 'msg' => 'not found']);
         $this->redirect('/app', 302);
     }
 

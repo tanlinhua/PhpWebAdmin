@@ -25,14 +25,14 @@ Route::group('admin', [
     //用户管理
     'adm/view'      => ['admin/Admin/index', ['method' => 'get']],
     'adm/add'       => ['admin/Admin/add', ['method' => 'post']], //增
-    'adm/del'       => ['admin/Admin/del', ['method' => 'get']], //删
+    'adm/del'       => ['admin/Admin/del', ['method' => 'post']], //删
     'adm/update'    => ['admin/Admin/update', ['method' => 'post']], //改
     'adm/get'       => ['admin/Admin/get', ['method' => 'get']], //查
 
     //角色管理
     'role/view'      => ['admin/Role/index', ['method' => 'get']],
     'role/add'       => ['admin/Role/add', ['method' => 'post']], //增
-    'role/del'       => ['admin/Role/del', ['method' => 'get']], //删
+    'role/del'       => ['admin/Role/del', ['method' => 'post']], //删
     'role/update'    => ['admin/Role/update', ['method' => 'post']], //改
     'role/get'       => ['admin/Role/get', ['method' => 'get']], //查
 
@@ -43,9 +43,13 @@ Route::group('admin', [
     //参数配置
     'params/view'      => ['admin/Params/index', ['method' => 'get']],
     'params/add'       => ['admin/Params/add', ['method' => 'post']], //增
-    'params/del'       => ['admin/Params/del', ['method' => 'get']], //删
+    'params/del'       => ['admin/Params/del', ['method' => 'post']], //删
     'params/update'    => ['admin/Params/update', ['method' => 'post']], //改
     'params/get'       => ['admin/Params/get', ['method' => 'get']], //查
+
+    //操作日志
+    'adminlog/view'     => ['admin/AdminLog/index', ['method' => 'get']],
+    'adminlog/get'     => ['admin/AdminLog/get', ['method' => 'get']], //查
 ]);
 
 // Api

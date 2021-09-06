@@ -273,6 +273,8 @@ return [
         // PHP: composer require "phpgangsta/googleauthenticator:dev-master"
         // iOS: AppStore搜索Google Authenticator / Android: GooglePlay搜索Google身份验证器或者其他安卓市场下载
         'google'    => false,
+        // 是否开启管理员操作日志
+        'log'       => true,
     ],
 
     //JWT

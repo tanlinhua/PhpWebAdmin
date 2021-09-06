@@ -47,7 +47,7 @@ class Admin extends Base
     // 删
     public function del()
     {
-        $data = input('get.');
+        $data = input('post.');
 
         $vResult = $this->validate($data, 'Admin.del');
         if (true !== $vResult) {
@@ -85,12 +85,7 @@ class Admin extends Base
             return error($vResult);
         }
 
-        $page   = trim(input('page'));    //分页
-        $limits = trim(input('limit'));   //分页数量
-        $search = trim(input("search"));  //检索
-        $role   = trim(input("role"));    //角色
-        $t1     = trim(input("t1"));      //开始时间
-        $t2     = trim(input("t2"));      //结束时间
+        list($page, $limit, $search, $role, $t1, $t2) = $this->getParams(['search', 'role', 't1', 't2']);
 
         $db = db('admin')->alias('a')->join('role r', 'a.role=r.id', 'left')
             ->where('a.role', 'NEQ', 0)->order('a.id asc')
@@ -117,9 +112,9 @@ class Admin extends Base
             $db = $db->whereIn('a.id', $ids);
         }
 
-        $limits = empty($limits) ? 100 : $limits; // 临时解决一下上级id下拉框赋值
+        $limit = empty($limit) ? 100 : $limit; // 临时解决一下上级id下拉框赋值
 
-        $result = $db->paginate($limits, false, ['page'  => $page]);
+        $result = $db->paginate($limit, false, ['page'  => $page]);
 
         return success('success', $result->total(), $result->items());
     }
