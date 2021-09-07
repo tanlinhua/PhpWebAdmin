@@ -419,7 +419,7 @@ if (!function_exists('xss_clean')) {
      */
     function xss_clean($content, $is_image = false)
     {
-        return \app\common\library\Security::instance()->xss_clean($content, $is_image);
+        return \lib\Security::instance()->xss_clean($content, $is_image);
     }
 }
 
