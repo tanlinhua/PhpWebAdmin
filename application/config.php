@@ -154,7 +154,7 @@ return [
     // +----------------------------------------------------------------------
     'log'                    => [
         // 日志记录方式，内置 file socket 支持扩展
-        'type'  => '\log\driver\File', // 'type'  => 'File',
+        'type'  => '\tpl\log\driver\File', // 'type'  => 'File',
         // 日志保存目录
         'path'  => LOG_PATH,
         // 独立日志

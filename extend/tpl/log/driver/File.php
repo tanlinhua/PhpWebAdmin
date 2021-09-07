@@ -1,6 +1,6 @@
 <?php
 
-namespace log\driver;
+namespace tpl\log\driver;
 
 use think\log\driver\File as FileDriver;
 
