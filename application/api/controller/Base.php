@@ -2,8 +2,8 @@
 
 namespace app\api\controller;
 
-use app\common\library\Token;
 use Exception;
+use lib\Token;
 use think\Controller;
 use think\Request;
 

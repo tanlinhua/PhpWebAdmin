@@ -2,7 +2,7 @@
 
 namespace app\api\controller;
 
-use app\common\library\Token;
+use lib\Token;
 use think\Cache;
 use think\Validate;
 

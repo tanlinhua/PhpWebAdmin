@@ -2,9 +2,9 @@
 
 namespace app\index\controller;
 
-use app\common\library\Redis;
 use app\queue\Handler as QueueHandler;
 use app\swoole\Handler as SwooleHandler;
+use lib\Redis;
 use think\Controller;
 
 class Index extends Controller

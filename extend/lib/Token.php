@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\library;
+namespace lib;
 
 use Firebase\JWT\JWT;
 
