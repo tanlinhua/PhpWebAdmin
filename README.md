@@ -70,6 +70,8 @@
 
 > **AWS** [composer require aws/aws-sdk-php](https://docs.aws.amazon.com/zh_cn/sdk-for-php/index.html)
 
+> **依赖PCNTL的异步包**[composer require spatie/async](https://github.com/spatie/async)
+
 > **权限管理** 
 ```
 php-casbin: https://github.com/php-casbin/php-casbin
