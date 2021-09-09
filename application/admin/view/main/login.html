@@ -63,16 +63,25 @@
     };
 
     function login() {
-        console.log($("[name='__token__']").val());
+        var user_name = $('#username').val();
+        var password = $('#password').val();
+        var code = $('#code').val();
+        var g_code = $('#g_code').val();
+        var __token__ = $("[name='__token__']").val();
+
+        if (user_name == "" || password == "" || code == "") {
+            layer.msg("请检查输入");
+            return;
+        }
         $.ajax({
             url: '/admin/login/check',
             method: 'post',
             data: {
-                user_name: $('#username').val(),
-                password: $('#password').val(),
-                code: $('#code').val(),
-                g_code: $('#g_code').val(),
-                __token__: $("[name='__token__']").val(),
+                user_name: user_name,
+                password: password,
+                code: code,
+                g_code: g_code,
+                __token__: __token__,
             },
             dataType: 'JSON',
             success: function (res) {
