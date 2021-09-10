@@ -59,26 +59,3 @@ class RedisLock
         return $this->redis->del($key);
     }
 }
-
-/*
-Demo:
-
-$lockobj = new RedisLock();
-if ($lock = $lockObj->set('storage', 10)) {
-    $sql = "select `number` from storage where id=1 limit 1";
-    $res = $pdo->query($sql)->fetch();
-    $number = $res['number'];
-    if ($number > 0) {
-        $sql = "insert into `order` VALUES (null,$number)";
-        $order_id = $pdo->query($sql);
-        if ($order_id) {
-            $sql = "update storage set `number`=`number`-1 WHERE id=1";
-            $pdo->query($sql);
-        }
-    }
-    //解锁
-    $lockObj->del('storage');
-} else {
-    //加锁不成功执行其他操作。
-}
-*/
