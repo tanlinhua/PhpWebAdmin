@@ -72,31 +72,40 @@
 
 > **依赖PCNTL的异步包**[composer require spatie/async](https://github.com/spatie/async)
 
-> **权限管理** 
+> **APNs** [composer require duccio/apns-php](https://github.com/immobiliare/ApnsPHP)
+
+> **权限管理**
 ```
 php-casbin: https://github.com/php-casbin/php-casbin
 TP6权限: https://github.com/php-casbin/think-authz
 adapter: https://github.com/php-casbin/database-adapter
 ```
 
-> **APNs** [composer require duccio/apns-php](https://github.com/immobiliare/ApnsPHP)
-
 # [PHP常用内置函数](docs/一些笔记/PHP常用内置函数.md)
 
 # [Swoole框架](https://www.swoole.com/)
 
 > [imi](https://www.imiphp.com/)
+
 > [Hyperf](https://www.hyperf.io/)
 
-# [命令行](https://www.kancloud.cn/manual/thinkphp5/122951)
+# 性能
+
+## [TP5性能相关命令](https://www.kancloud.cn/manual/thinkphp5/122951)
+
+> 生成数据表字段缓存,提升数据库查询的性能   -> php think optimize:schema
 
 > 生成类库映射文件,提高系统自动加载的性能   -> php think optimize:autoload
 
 > 生成路由缓存,提高系统的路由检测的性能     -> php think optimize:route
 
-> 生成数据表字段缓存,提升数据库查询的性能   -> php think optimize:schema
+## PHP性能相关
 
-# 性能调试
+> php opcache   -> https://www.cnblogs.com/lamp01/p/8985068.html
+
+> php8 JIT -> https://blog.csdn.net/weixin_43814458/article/details/109471041
+
+## TP5性能调试
 
 ```php
 debug('begin');
@@ -109,14 +118,9 @@ echo debug('begin','end',6).'s';    // 设置时间精度 (0.005587s)
 echo debug('begin','end','m');      // 内存占用情况 (0.838KB)
 ```
 
-# 漏洞
+# 漏洞&安全
 
-### WEB安全
-- [Web安全学习笔记](https://github.com/LyleMi/Learn-Web-Hacking)
-- [在线阅读](https://websec.readthedocs.io/zh/latest/)
-- [开发中参考](https://www.kancloud.cn/manual/thinkphp5/268462)
-
-### 修复记录
+## this.修复记录
 ```php
 thinkphp\library\think\process\pipes\Windows.php
 /**
@@ -138,7 +142,16 @@ private function removeFiles()
 }
 ```
 
-### ThinkPHP < 5.0.24 远程代码执行高危漏洞
-- https://www.freebuf.com/vuls/194127.html
-- https://www.zhangweijiang.com/article/3.html
-- https://xz.aliyun.com/t/6106
+## WEB安全
+> [Web安全学习笔记](https://github.com/LyleMi/Learn-Web-Hacking)
+
+> [在线阅读](https://websec.readthedocs.io/zh/latest/)
+
+> [开发中参考](https://www.kancloud.cn/manual/thinkphp5/268462)
+
+## ThinkPHP < 5.0.24 远程代码执行高危漏洞
+> https://www.freebuf.com/vuls/194127.html
+
+> https://www.zhangweijiang.com/article/3.html
+
+> https://xz.aliyun.com/t/6106
