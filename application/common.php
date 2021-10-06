@@ -6,12 +6,12 @@ if (!function_exists('success')) {
     /**
      * 响应成功的json数据
      *
-     * @param   string $msg
-     * @param   int $count 数据总数->for layui
-     * @param   array $data
-     * @return  json
+     * @param string $msg
+     * @param int $count 数据总数 -> for layui
+     * @param array $data
+     * @return  think\response\Json
      */
-    function success($msg = 'success', $count = 0, $data = array())
+    function success(string $msg = 'success', int $count = 0, array $data = array()): \think\response\Json
     {
         $data = array('code' => 0, 'msg' => $msg, 'count' => $count, 'data' => $data);
         return json($data);
@@ -22,10 +22,11 @@ if (!function_exists('error')) {
     /**
      * 响应失败的json数据
      *
-     * @param  string $msg
-     * @return json
+     * @param string $msg
+     * @param int $code
+     * @return think\response\Json
      */
-    function error($msg = 'fail', $code = -1)
+    function error(string $msg = 'fail', int $code = -1): \think\response\Json
     {
         $data = array('code' => $code, 'msg' => $msg, 'count' => 0, 'data' => null);
         return json($data);
@@ -43,10 +44,9 @@ if (!function_exists('encrypt_string')) {
      * @param string $iv    字符串IV
      * @return string
      */
-    function encrypt_string($str, $key = "ak47", $iv = "m416")
+    function encrypt_string(string $str, string $key = "ak47", string $iv = "m416"): string
     {
-        $base = base64_encode(openssl_encrypt($str, 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16)));
-        return $base;
+        return base64_encode(openssl_encrypt($str, 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16)));
     }
 }
 
@@ -61,10 +61,9 @@ if (!function_exists('decrypt_string')) {
      * @param string $iv    字符串IV
      * @return String
      */
-    function decrypt_string($encryptedText,  $key = "ak47", $iv = "m416")
+    function decrypt_string(string $encryptedText, string $key = "ak47", string $iv = "m416"): string
     {
-        $str = openssl_decrypt(base64_decode($encryptedText), 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16));
-        return $str;
+        return openssl_decrypt(base64_decode($encryptedText), 'aes-128-cbc', substr(md5($key), 0, 16), true, substr(md5($iv), 0, 16));
     }
 }
 
@@ -72,12 +71,12 @@ if (!function_exists('is_empty')) {
     /**
      * 判断空
      */
-    function is_empty($var)
+    function is_empty($var): bool
     {
         if (is_null($var)) {
             return true;
         } else if (is_string($var)) {
-            return '' === trim($var) ? true : false;
+            return trim($var) === '';
         } else if (is_array($var)) {
             return empty($var);
         } else if (is_object($var)) {
@@ -105,7 +104,7 @@ if (!function_exists('get_client_ip')) {
      *
      * @return string
      */
-    function get_client_ip()
+    function get_client_ip(): string
     {
         if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
             $cip = $_SERVER["HTTP_CLIENT_IP"];
@@ -117,7 +116,7 @@ if (!function_exists('get_client_ip')) {
             $cip = '';
         }
         preg_match("/[\d\.]{7,15}/", $cip, $cips);
-        $cip = isset($cips[0]) ? $cips[0] : 'unknown';
+        $cip = $cips[0] ?? 'unknown';
         unset($cips);
 
         return $cip;
@@ -128,7 +127,7 @@ if (!function_exists('get_curr_date_time')) {
     /**
      * 获取当前时间
      * 
-     * @return dateTime
+     * @return false|string
      */
     function get_curr_date_time()
     {
@@ -143,14 +142,13 @@ if (!function_exists('is_phone_china')) {
      * @param string $phone
      * @return boolean
      */
-    function is_phone_china($phone = '')
+    function is_phone_china(string $phone): bool
     {
         $search = '/^0?1[3|4|5|6|7|8][0-9]\d{8}$/';
         if (preg_match($search, $phone)) {
-            return (true);
-        } else {
-            return (false);
+            return true;
         }
+        return false;
     }
 }
 
@@ -161,12 +159,11 @@ if (!function_exists('make_random_string')) {
      * @param int $length
      * @return string
      */
-    function make_random_string($length = 8)
+    function make_random_string(int $length = 8): string
     {
         $str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
         $randStr = str_shuffle($str); //打乱字符串
-        $rands = substr($randStr, 0, $length); //substr(string,start,length);返回字符串的一部分
-        return $rands;
+        return substr($randStr, 0, $length); //substr(string,start,length);返回字符串的一部分
     }
 }
 
@@ -174,14 +171,13 @@ if (!function_exists('make_order_number')) {
     /**
      * 生成唯一订单号
      * 
-     * @return 订单编号
+     * @return string
      */
-    function make_order_number()
+    function make_order_number(): string
     {
         $yCode = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
         $orderSn = $yCode[intval(date('Y')) - 2011] . strtoupper(dechex(date('m'))) . date('d') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf('%04d', rand(0, 9999));
-        $orderSn = $orderSn . time();
-        return $orderSn;
+        return $orderSn . time();
     }
 }
 
@@ -189,15 +185,14 @@ if (!function_exists('get_sys_params_value')) {
     /**
      * 获取系统配置表的value值
      *
-     * @param  string   $key
+     * @param string $key
      * @return string
      */
-    function get_sys_params_value($key)
+    function get_sys_params_value(string $key): string
     {
         $value = db("sys_params")->where("key", "{$key}")->value('value');
         $value = stripslashes($value);
-        $value = htmlspecialchars_decode($value);
-        return $value;
+        return htmlspecialchars_decode($value);
     }
 }
 
@@ -208,7 +203,7 @@ if (!function_exists('csv_input')) {
      * @param string $filePath -> $filePath = 'uploads' . DS . $info->getSaveName();
      * @return array
      */
-    function csv_input($filePath)
+    function csv_input(string $filePath): array
     {
         $handle = fopen($filePath, 'r');
 
@@ -233,7 +228,7 @@ if (!function_exists('csv_output')) {
      * @param array $data
      * @return void
      */
-    function csv_output($filename, $data)
+    function csv_output(string $filename, array $data)
     {
         $filename = $filename . '-' . date("YmdHis", time()) . '-导出.csv'; //文件名
         header("Content-type:text/csv");
@@ -317,7 +312,7 @@ if (!function_exists('array_filter_empty_string')) {
      * @param array $arr
      * @return array $allowArr
      */
-    function array_filter_empty_string($arr)
+    function array_filter_empty_string(array $arr): array
     {
         $allowArr = [];
 
@@ -339,11 +334,11 @@ if (!function_exists('check_api_sign')) {
      * @param array $param
      * @return bool
      */
-    function check_api_sign($param = [])
+    function check_api_sign(array $param = []): bool
     {
         $signKey = "FUCK"; //接口验证key
         $result = false;
-        $signstr = '';
+        $signStr = '';
 
         if (!isset($param['sign'])) {
             return $result;
@@ -357,12 +352,12 @@ if (!function_exists('check_api_sign')) {
                 if ($value == '') {
                     continue;
                 }
-                $signstr .= $key . '=' . $value . '&';
+                $signStr .= $key . '=' . $value . '&';
             }
-            // $signstr = rtrim($signstr, '&');
+            // $signKey = rtrim($signKey, '&');
         }
-        $signstr .= "key=$signKey";
-        $newSign = md5($signstr);
+        $signStr .= "key=$signKey";
+        $newSign = md5($signStr);
 
         if (strcmp($sign, $newSign) == 0) {
             $result = true;
@@ -375,12 +370,12 @@ if (!function_exists('check_api_sign')) {
 if (!function_exists('save_upload_file')) {
     /**
      * 保存上传文件并返回本地存储路径
-     * @param   \think\File $file   [request()->file('img')]
-     * @param   string      $ext    文件后缀，多个用逗号分割或者数组
-     * @param   string      $type   文件MIME类型，多个用逗号分割或者数组
+     * @param \think\File $file   [request()->file('img')]
+     * @param string $ext    文件后缀，多个用逗号分割或者数组
+     * @param string $type   文件MIME类型，多个用逗号分割或者数组
      * @return  string      $uri    存储路径
      */
-    function save_upload_file($file, $ext = 'jpg,png,gif,bmp,jpeg', $type = 'image/png,image/jpeg,image/gif,image/bmp')
+    function save_upload_file(\think\File $file, string $ext = 'jpg,png,gif,bmp,jpeg', string $type = 'image/png,image/jpeg,image/gif,image/bmp')
     {
         $uri = '';
         $folder = 'uploads';
@@ -401,15 +396,14 @@ if (!function_exists('emoji_filter')) {
     /**
      * 过滤掉emoji表情
      *
-     * @param   string $source
+     * @param string $source
      * @return  string $str
      */
-    function emoji_filter($source)
+    function emoji_filter(string $source): string
     {
-        $filter = preg_replace_callback('/./u', function (array $match) {
+        return preg_replace_callback('/./u', function (array $match) {
             return strlen($match[0]) >= 4 ? '' : $match[0];
         }, $source);
-        return $filter;
     }
 }
 
@@ -429,15 +423,14 @@ if (!function_exists('http_host')) {
      *
      * @return string
      */
-    function http_host()
+    function http_host(): string
     {
         $http_type = (
             (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
             || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
             || ($_SERVER['SERVER_PORT'] == 443)) ? 'https://' : 'http://';
 
-        $host = $http_type . $_SERVER['HTTP_HOST'];
-        return $host;
+        return $http_type . $_SERVER['HTTP_HOST'];
     }
 }
 
@@ -445,14 +438,13 @@ if (!function_exists('http_host')) {
     /**
      * 生成uuid
      */
-    function uuid()
+    function uuid(): string
     {
         $chars = md5(uniqid(mt_rand(), true));
-        $uuid = substr($chars, 0, 8) . '-'
+        return substr($chars, 0, 8) . '-'
             . substr($chars, 8, 4) . '-'
             . substr($chars, 12, 4) . '-'
             . substr($chars, 16, 4) . '-'
             . substr($chars, 20, 12);
-        return $uuid;
     }
 }
