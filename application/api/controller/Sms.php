@@ -12,7 +12,7 @@ class Sms
     /**
      * 发送手机验证码
      * GET api/sms/send?phone=手机号&time=时间戳&sign=md5(phone=手机号&time=时间戳&key=FUCK) [md5的字符串接是:参数按照键名进行升序排序]
-     * @return json
+     * @return \think\response\Json
      */
     public function send()
     {
@@ -59,15 +59,13 @@ class Sms
     }
 
     // 获取短信内容
-    private function getCodeContent($code)
+    private function getCodeContent($code): string
     {
-        $content = "";
-        $content = "验证码:$code,5分钟有效期";
-        return $content;
+        return "验证码:$code,5分钟有效期";
     }
 
     // 发送
-    private function sendSms($phone, $content)
+    private function sendSms($phone, $content): bool
     {
         $sms_code_channel = get_sys_params_value('sms_code_channel'); //后台配置短信验证码通道
         //根据配置通道调用指定func

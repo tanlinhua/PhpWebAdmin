@@ -15,7 +15,7 @@ class User
      * 用户注册
      * @method POST api/user/reg
      * @param DATA phone=手机&password=密码&code=短信验证码&device_type=设备类型:1安卓2苹果&device_info=设备详情&device_key=设备ID
-     * @return json
+     * @return \think\response\Json
      */
     public function reg()
     {
@@ -63,7 +63,7 @@ class User
      * 用户登录
      * @method POST api/user/login
      * @param  DATA phone=手机&password=密码(小写MD5值)
-     * @return json
+     * @return \think\response\Json
      */
     public function login()
     {
@@ -100,14 +100,15 @@ class User
         $update['last_login_ip'] = get_client_ip();
         db('user')->where('phone', $phone)->update($update);
 
-        return success(lang('login success'), 0, Token::make_jwt($query['id']));
+        $jwt['jwt'] = Token::make_jwt($query['id']);
+        return success(lang('login success'), 0, $jwt);
     }
 
     /**
      * 修改密码
      * POST api/user/cpwd
      * @param DATA phone=手机&password=当前密码&new1=新密码&new2=确认密码
-     * @return json
+     * @return \think\response\Json
      */
     public function cpwd()
     {
@@ -138,8 +139,8 @@ class User
     /**
      * 忘记密码
      * POST api/user/forget
-     * @param DATA phone=手机&code=短信验证码&password=新密码
-     * @return json
+     * @param  DATA phone=手机&code=短信验证码&password=新密码
+     * @return \think\response\Json
      */
     public function forget()
     {

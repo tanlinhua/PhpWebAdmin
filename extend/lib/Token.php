@@ -8,10 +8,11 @@ class Token
 {
     /**
      * 生成JWT
-     * @param  string $data
+     * 
+     * @param string $data
      * @return string
      */
-    public static function make_jwt($data = '')
+    public static function make_jwt(string $data): string
     {
         $key     = config('jwt.key');
         $time    = time();
@@ -23,8 +24,7 @@ class Token
             "exp"  => $time + $timeOut, //token 过期时间
             "data" => $data,            //记录的userid的信息，这里是自已添加上去的，如果有其它信息，可以再添加数组的键值对
         ];
-        $jwt = JWT::encode($token, $key);
-        return $jwt;
+        return JWT::encode($token, $key);
     }
 
     /**
