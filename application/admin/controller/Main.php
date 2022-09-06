@@ -81,4 +81,13 @@ class Main extends Base
             return error("Sorry,修改失败");
         }
     }
+
+    /**
+     * 获取公告
+     */
+    public function getMessage()
+    {
+        $result['msg'] = db('sys_params')->where('key', 'admin_message')->value('value');
+        return success("success", 1, $result);
+    }
 }

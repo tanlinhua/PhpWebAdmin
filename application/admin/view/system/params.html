@@ -14,7 +14,7 @@
 <body class="layui-view-body">
     <div class="layui-content">
 
-        <div class="layui-page-header">
+        <!-- <div class="layui-page-header">
             <div class="pagewrap">
                 <span class="layui-breadcrumb">
                     <a href="">首页</a>
@@ -22,7 +22,7 @@
                     <a><cite>系统参数</cite></a>
                 </span>
             </div>
-        </div>
+        </div> -->
 
         <div class="layui-row">
             <div class="layui-card">
@@ -81,11 +81,11 @@
         ]],
         page: true,
         limits: [10, 15, 20, 50, 100],
-        limit: 15,
+        // limit: 15,
         id: 'paramsReload',
         done: function (res) { layer.close(index); },
         escape: true, // 是否开启 xss 字符过滤（默认 false）layui 2.6.8 新增
-        height: 'full-212', // full- 固定语法,数字标识: 表格容器距离浏览器顶部和底部的距离“和”
+        // height: 'full-212', // full- 固定语法,数字标识: 表格容器距离浏览器顶部和底部的距离“和”
     });
 
     //查询并表格重载

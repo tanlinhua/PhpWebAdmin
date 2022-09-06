@@ -21,6 +21,7 @@ Route::group('admin', [
     'main'          => ['admin/Main/main', ['method' => 'get']],
     'console'       => ['admin/Main/console', ['method' => 'get']], //控制台
     'cpw'           => ['admin/Main/doCPW', ['method' => 'post']], //修改密码
+    'message/get'   => ['admin/Main/getMessage', ['method' => 'get']], //获取消息
 
     //用户管理
     'adm/view'      => ['admin/Admin/index', ['method' => 'get']],
