@@ -30,10 +30,10 @@
 <div class="system-message error">
     <?php switch ($code) {?>
         <?php case 1:?>
-            <div class="image"> <img src="__STATIC__/success.svg" alt="" width="80" /> </div>
+            <div class="image"> <img src="__STATIC__/img/svg/success.svg" alt="" width="80" /> </div>
             <?php break;?>
         <?php case 0:?>
-            <div class="image"> <img src="__STATIC__/error.svg" alt="" width="80" /> </div>
+            <div class="image"> <img src="__STATIC__/img/svg/error.svg" alt="" width="80" /> </div>
             <?php break;?>
     <?php } ?>
     <h1><?php echo(strip_tags($msg));?></h1>
